@@ -7,6 +7,8 @@ use App\Models\VideoModel;
 
 class GaleriVideoController extends BaseController
 {
+    protected $videoModel;
+
     public function __construct()
     {
         $this->videoModel = new VideoModel;
@@ -76,13 +78,13 @@ class GaleriVideoController extends BaseController
         if (!$simpan) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal ditambahkan!');
-            return redirect()->to('/create-video-galery');
+            return redirect()->to('/create-video-gallery');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil ditambahkan!');
-            return redirect()->to('/video-galery');
+            return redirect()->to('/video-gallery');
         }
     }
 
@@ -141,13 +143,13 @@ class GaleriVideoController extends BaseController
         if (!$ubah) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal diubah!');
-            return redirect()->to('/edit-video-galery');
+            return redirect()->to('/edit-video-gallery');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil diubah!');
-            return redirect()->to('/video-galery');
+            return redirect()->to('/video-gallery');
         }
     }
 
@@ -161,13 +163,13 @@ class GaleriVideoController extends BaseController
         if (!$hapus) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal dihapus!');
-            return redirect()->to('/video-galery');
+            return redirect()->to('/video-gallery');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil dihapus!');
-            return redirect()->to('/video-galery');
+            return redirect()->to('/video-gallery');
         }
     }
 }
