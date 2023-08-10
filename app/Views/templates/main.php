@@ -85,7 +85,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#isi').summernote();
+            $('#isi, #sejarah_desa, #kalimat_ucapan, #visi, #misi').summernote();
         });
     </script>
     <script>

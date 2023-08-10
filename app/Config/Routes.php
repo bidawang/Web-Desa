@@ -31,12 +31,23 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('/video-galery', 'GaleriVideoController::index');
+$routes->get('/create-video-galery', 'GaleriVideoController::create');
+$routes->post('/save-video-galery', 'GaleriVideoController::save');
+$routes->get('/edit-video-galery/(:num)', 'GaleriVideoController::edit/$1');
+$routes->post('/update-video-galery/(:num)', 'GaleriVideoController::update/$1');
+$routes->get('/delete-video-galery/(:num)', 'GaleriVideoController::delete/$1');
+
+
 $routes->get('/news', 'BeritaController::index');
 $routes->get('/create-news', 'BeritaController::create');
 $routes->post('/save-news', 'BeritaController::save');
 $routes->get('/news/edit/(:num)', 'BeritaController::edit/$1');
 $routes->post('/news/update/(:num)', 'BeritaController::update/$1');
 $routes->get('/news/delete/(:num)', 'BeritaController::delete/$1');
+
+$routes->get('/settings', 'PengaturanController::index');
+$routes->post('/settings/update', 'PengaturanController::update');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
