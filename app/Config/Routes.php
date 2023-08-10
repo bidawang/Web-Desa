@@ -31,6 +31,15 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+//routes gallery photo [RAHMAD DIVA]
+$routes->get('/galleryphoto', 'GalleryPhotoController::index');
+$routes->add('/create-galleryphoto', 'GalleryPhotoController::create');
+$routes->add('/save-galleryphoto', 'GalleryPhotoController::save');
+$routes->add('/galleryphoto/detail/(:any)', 'GalleryPhotoController::detail/$1');
+$routes->add('/galleryphoto/edit/(:num)', 'GalleryPhotoController::edit/$1');
+$routes->add('/galleryphoto/update/(:num)', 'GalleryPhotoController::update/$1');
+$routes->get('/galleryphoto/delete/(:num)', 'GalleryPhotoController::delete/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
