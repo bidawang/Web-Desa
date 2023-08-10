@@ -10,6 +10,7 @@ class TbPengaturan extends Migration
     {
         $this->forge->addField([
             'id'              => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'auto_increment' => true],
+            'nama_desa'       => ['type' => 'VARCHAR', 'constraint' => '100'],
             'sejarah_desa'    => ['type' => 'TEXT'],
             'kalimat_ucapan'  => ['type' => 'TEXT'],
             'visi'            => ['type' => 'TEXT'],

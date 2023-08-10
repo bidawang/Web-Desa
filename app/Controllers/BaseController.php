@@ -46,6 +46,13 @@ abstract class BaseController extends Controller
     /**
      * @return void
      */
+
+    protected $session;
+
+    public function __construct()
+    {
+        $this->session = \Config\Services::session(); // Load the session service
+    }
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
