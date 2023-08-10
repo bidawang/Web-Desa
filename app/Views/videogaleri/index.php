@@ -34,10 +34,11 @@
                                 </div>
                             <?php endif; ?>
                             <h3 class="card-title">Data Galeri Video</h3><br>
-                            <a class="btn btn-primary" href="/create-video-gallery">Tambah</a>
+                            
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                        <a class="btn btn-primary" href="/create-video-gallery">Tambah Data +</a>
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
