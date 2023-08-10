@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Berita</h1>
+                    <h1 class="m-0">Rukun Tetangga</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -27,11 +27,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Berita</h3>
+                            <h3 class="card-title">Jumlah Rukun Tetangga</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="/create-news" class="btn btn-primary">Tambah Data +</a>
                             <?php if (session('success')) : ?>
                                 <div class="alert alert-success alert-dismissible mt-3">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -49,9 +48,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Judul Berita</th>
-                                        <th>Kategori Berita</th>
-                                        <th>Tanggal dibuat</th>
+                                        <th>Jumlah Rukun Tetangga</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -70,15 +67,6 @@
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Judul Berita</th>
-                                        <th>Kategori Berita</th>
-                                        <th>Tanggal dibuat</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->
