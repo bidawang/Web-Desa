@@ -31,6 +31,12 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('/news', 'BeritaController::index');
+$routes->get('/create-news', 'BeritaController::create');
+$routes->post('/save-news', 'BeritaController::save');
+$routes->get('/news/edit/(:num)', 'BeritaController::edit/$1');
+$routes->post('/news/update/(:num)', 'BeritaController::update/$1');
+$routes->get('/news/delete/(:num)', 'BeritaController::delete/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

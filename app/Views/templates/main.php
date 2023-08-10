@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title><?= $title; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -47,6 +47,7 @@
     </div>
     <!-- ./wrapper -->
 
+
     <!-- jQuery -->
     <script src="<?= base_url('assets/'); ?>plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -81,6 +82,29 @@
     <!-- <script src="<?= base_url('assets/'); ?>dist/js/demo.js"></script> -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?= base_url('assets/'); ?>dist/js/pages/dashboard.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#isi').summernote();
+        });
+    </script>
+    <script>
+        function updateImagePreview(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imagePreview = document.getElementById('image-preview');
+                    imagePreview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        const imageInput = document.getElementById('foto');
+        imageInput.addEventListener('change', updateImagePreview);
+    </script>
 </body>
 
 </html>
