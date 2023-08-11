@@ -6,6 +6,9 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('dashboard/index');
+        $data = [
+            'title' => 'Desa',
+        ];
+        return view('landingpage/index', $data);
     }
 }
