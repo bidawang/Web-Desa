@@ -129,23 +129,26 @@ class BeritaController extends BaseController
                 'errors' => [
                     'required' => 'Kategori berita harus diisi.'
                 ]
-            ],
-            'foto' => [
+            ]
+        ];
+
+        // Check if a new photo is uploaded
+        if ($this->request->getFile('foto')->isValid()) {
+            $validationRules['foto'] = [
                 'rules' => 'uploaded[foto]|max_size[foto,2048]|is_image[foto]',
                 'errors' => [
                     'uploaded' => 'Pilih file gambar untuk foto.',
                     'max_size' => 'Ukuran file gambar maksimal 2MB.',
                     'is_image' => 'File harus berupa gambar (jpg, jpeg, png, gif).'
                 ]
-            ]
-        ];
+            ];
+        }
 
         if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
         $berita = $this->beritaModel->find($id);
-        var_dump($berita);
         if (!$berita) {
             return redirect()->to('/news')->with('error', 'Berita not found.');
         }
@@ -158,13 +161,15 @@ class BeritaController extends BaseController
             'judul_berita' => $judulBerita,
             'isi' => $this->request->getVar('isi'),
             'kategori_berita' => $this->request->getVar('kategori_berita'),
-            'foto' => $this->request->getFile('foto')->getName(),
         ];
 
-        if ($this->beritaModel->update($id, $data)) {
+        if ($this->request->getFile('foto')->isValid()) {
+            $data['foto'] = $this->request->getFile('foto')->getName();
             // Move uploaded file
             $this->request->getFile('foto')->move(ROOTPATH . 'public/uploads');
+        }
 
+        if ($this->beritaModel->update($id, $data)) {
             session()->setFlashdata('success', 'Data Berita Berhasil diupdate!');
         } else {
             session()->setFlashdata('error', 'Gagal mengupdate data berita.');
