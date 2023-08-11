@@ -52,7 +52,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/foto-gallery" class="nav-link">
+                            <a href="/galleryphoto" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Gallery Foto</p>
                             </a>
