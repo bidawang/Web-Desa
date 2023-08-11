@@ -31,15 +31,23 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-//routes gallery photo [RAHMAD DIVA]
-$routes->get('/galleryphoto', 'GalleryPhotoController::index');
-$routes->add('/create-galleryphoto', 'GalleryPhotoController::create');
-$routes->add('/save-galleryphoto', 'GalleryPhotoController::save');
-$routes->add('/galleryphoto/detail/(:any)', 'GalleryPhotoController::detail/$1');
-$routes->add('/galleryphoto/edit/(:num)', 'GalleryPhotoController::edit/$1');
-$routes->add('/galleryphoto/update/(:num)', 'GalleryPhotoController::update/$1');
-$routes->get('/galleryphoto/delete/(:num)', 'GalleryPhotoController::delete/$1');
+$routes->get('/video-gallery', 'GaleriVideoController::index');
+$routes->get('/create-video-gallery', 'GaleriVideoController::create');
+$routes->post('/save-video-gallery', 'GaleriVideoController::save');
+$routes->get('/edit-video-gallery/(:num)', 'GaleriVideoController::edit/$1');
+$routes->post('/update-video-gallery/(:num)', 'GaleriVideoController::update/$1');
+$routes->get('/delete-video-gallery/(:num)', 'GaleriVideoController::delete/$1');
 
+
+$routes->get('/news', 'BeritaController::index');
+$routes->get('/create-news', 'BeritaController::create');
+$routes->post('/save-news', 'BeritaController::save');
+$routes->get('/news/edit/(:num)', 'BeritaController::edit/$1');
+$routes->post('/news/update/(:num)', 'BeritaController::update/$1');
+$routes->get('/news/delete/(:num)', 'BeritaController::delete/$1');
+
+$routes->get('/settings', 'PengaturanController::index');
+$routes->post('/settings/update', 'PengaturanController::update');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
