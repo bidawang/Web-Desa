@@ -36,6 +36,28 @@ class GalleryPhotoController extends BaseController
         return view('galleryphoto/detail', $data);
     }
 
+    //function untuk carousel merubah ke 1 
+    public function active($id)
+{
+    $berhasil = $this->fotoModel->update([
+        'id' => $id,
+        'carousel' => 1
+    ]);
+
+    var_dump($berhasil);
+    die; 
+
+    if ($berhasil) {
+        session()->setFlashdata('pesan', 'Data berhasil diubah');
+    } else {
+        session()->setFlashdata('errors', 'Gagal mengubah data');
+    }
+
+    return redirect()->to('/galleryphoto');
+}
+
+
+
     public function create()
     {
         $data = [
