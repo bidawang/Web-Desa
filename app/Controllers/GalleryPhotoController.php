@@ -136,22 +136,27 @@ class GalleryPhotoController extends BaseController
 
         if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-
         }
 
         $judulFoto = $this->request->getVar('judul_foto');
         $data = [
             'judul_foto' => $judulFoto,
-            'nama_foto' => $this->request->getFile('nama_foto')->getName(),
             'deskripsi' => $this->request->getVar('deskripsi')
         ];
 
-        if ($this->fotoModel->update($data)) {
-            //pindah ke 
-            $this->request->getFile('nama_foto')->move(ROOTPATH . 'public/uploads');
-            session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
+        $file = $this->request->getFile('nama_foto');
+
+        if ($file->isValid()) {
+            $newFileName = $file->getRandomName();
+            $file->move(ROOTPATH . 'public/uploads', $newFileName);
+            $data['nama_foto'] = $newFileName;
+        }
+
+        // Lakukan pembaruan data
+        if ($this->fotoModel->update($id, $data)) {
+            session()->setFlashdata('pesan', 'Data berhasil diperbarui');
         } else {
-            session()->setFlashdata('errors', 'Data gagal ditambahkan');
+            session()->setFlashdata('errors', 'Data gagal diperbarui');
         }
 
         return redirect()->to('/galleryphoto');

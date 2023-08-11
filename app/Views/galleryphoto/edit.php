@@ -55,8 +55,8 @@
                                 <?php endif; ?>
                             </div>
                             <div class="col">
-                                <input type="file" name="nama_foto" class="form-control"
-                                    <?= (session('errors.nama_foto')) ? 'is-invalid' : '' ?>>
+                                <input type="file" name="nama_foto" value="<?= $gallery['nama_foto'] ?>"
+                                    class="form-control" <?= (session('errors.nama_foto')) ? 'is-invalid' : '' ?>>
                                 <?php if (session('errors.nama_foto')): ?>
                                     <div class="invalid-feedback">
                                         <?= session('errors.nama_foto') ?>
@@ -67,8 +67,7 @@
 
                         <div class="row mt-3">
                             <div class="col">
-                                <textarea name="deskripsi" class="form-control"
-                                    <?= (session('errors.deskripsi')) ? 'is-invalid' : '' ?>
+                                <textarea name="deskripsi" class="form-control" <?= (session('errors.deskripsi')) ? 'is-invalid' : '' ?>
                                     placeholder="Description"><?= $gallery['deskripsi'] ?></textarea>
                                 <?php if (session('errors.deskripsi')): ?>
                                     <div class="invalid-feedback">
