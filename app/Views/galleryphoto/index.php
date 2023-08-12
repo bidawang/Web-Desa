@@ -80,9 +80,18 @@
                                                 class="fas fa-trash"></i></a>
                                     </td>
                                     <td>
-                             
+                                        <?php if ($row['carousel'] == 0): ?>
+                                            <a href="<?= base_url('galleryphoto/active/' . $row['id']) ?>"
+                                                class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?')">
+                                                <i class="fas fa-times"></i></a>
+                                        <?php else: ?>
+                                            <a href="<?= base_url('galleryphoto/active/' . $row['id']) ?>"
+                                                class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?')"> <i
+                                                    class="fas fa-times"></i></a>
+                                        <?php endif; ?>
                                     </td>
-                                
+
+
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

@@ -32,6 +32,7 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 $routes->get('/galleryphoto', 'GalleryPhotoController::index');
+$routes->get('/page-gallery', 'GalleryPhotoController::page_gallery');
 $routes->add('/create-galleryphoto', 'GalleryPhotoController::create');
 $routes->add('/save-galleryphoto', 'GalleryPhotoController::save');
 $routes->add('/galleryphoto/detail/(:any)', 'GalleryPhotoController::detail/$1');
@@ -40,6 +41,7 @@ $routes->add('/galleryphoto/update/(:num)', 'GalleryPhotoController::update/$1')
 $routes->get('/galleryphoto/delete/(:num)', 'GalleryPhotoController::delete/$1');
 $routes->add('/galleryphoto/active/(:num)', 'GalleryPhotoController::active/$1');
 $routes->add('/galleryphoto/deactive/(:num)', 'GalleryPhotoController::deactive/$1');
+
 
 
 $routes->get('/video-gallery', 'GaleriVideoController::index');

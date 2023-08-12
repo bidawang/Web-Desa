@@ -22,7 +22,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Galeri</a>
                             <div class="dropdown-menu bg-light rounded-0 m-0">
-                                <a href="feature.html" class="dropdown-item">Foto</a>
+                                <a href="/page-gallery" class="dropdown-item">Foto</a>
                                 <a href="blog.html" class="dropdown-item">Video</a>
                             </div>
                         </div>
