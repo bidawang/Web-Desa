@@ -31,6 +31,8 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/village-history', 'ProfileController::VillageHistory');
+$routes->get('/vision-mission', 'ProfileController::VisionMission');
+$routes->get('/regional-potential', 'ProfileController::RegionalPotential');
 
 $routes->get('/galleryphoto', 'GalleryPhotoController::index');
 $routes->add('/create-galleryphoto', 'GalleryPhotoController::create');

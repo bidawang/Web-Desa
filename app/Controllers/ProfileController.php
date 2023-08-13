@@ -24,4 +24,26 @@ class ProfileController extends BaseController
 
         return view('landingpage/villagehistory', $data);
     }
+
+    public function VisionMission()
+    {
+        $pengaturan = $this->pengaturanModel->first();
+        $data = [
+            'title' => 'Visi dan Misi',
+            'pengaturan' => $pengaturan
+        ];
+
+        return view('landingpage/visimisi', $data);
+    }
+
+    public function RegionalPotential()
+    {
+        $pengaturan = $this->pengaturanModel->first();
+        $data = [
+            'title' => 'Potensi Wilayah',
+            'pengaturan' => $pengaturan
+        ];
+
+        return view('landingpage/potensiwilayah', $data);
+    }
 }
