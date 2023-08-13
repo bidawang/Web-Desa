@@ -4,14 +4,30 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BeritaModel;
+use App\Models\PengaturanModel;
 
 class BeritaController extends BaseController
 {
     protected $beritaModel;
+    protected $pengaturanModel;
 
     public function __construct()
     {
         $this->beritaModel = new BeritaModel();
+        $this->pengaturanModel = new PengaturanModel();
+    }
+
+    public function pageNews()
+    {
+        $berita = $this->beritaModel->findAll();
+        $pengaturan = $this->pengaturanModel->first();
+        $data = [
+            'title' => 'Berita',
+            'berita' => $berita,
+            'pengaturan' => $pengaturan
+        ];
+
+        return view('landingpage/pagenews', $data);
     }
 
     public function index()
