@@ -30,7 +30,7 @@ class BeritaController extends BaseController
         return view('landingpage/pagenews', $data);
     }
 
-    public function detailpageNews($slug)
+    public function pageDetailNews($slug)
     {
         $berita = $this->beritaModel->getBySlug($slug);
         $pengaturan = $this->pengaturanModel->first();
@@ -45,7 +45,7 @@ class BeritaController extends BaseController
         $formatted_date = $day_name . ', ' . date('d', $created_at) . ' ' . $month_name . ' ' . date('Y H:i', $created_at);
 
         $data = [
-            'title' => 'Berita',
+            'title' => 'Berita ' . ucwords(strtolower($berita['judul_berita'])),
             'berita' => $berita,
             'pengaturan' => $pengaturan,
             'formatted_date' => $formatted_date
