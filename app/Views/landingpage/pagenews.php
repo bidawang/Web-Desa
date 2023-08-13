@@ -11,7 +11,7 @@
         </div>
         <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
             <?php foreach ($berita as $b) : ?>
-                <a href="<?= base_url('news/' . $b['slug']); ?>" class="d-block product-item rounded">
+                <a href="<?= base_url('page-news/' . $b['slug']); ?>" class="d-block product-item rounded">
                     <img src="<?= base_url('uploads/' . $b['foto']); ?>" alt="<?= $b['judul_berita']; ?>">
                     <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
                         <p><strong><?= $b['judul_berita']; ?></strong></p>

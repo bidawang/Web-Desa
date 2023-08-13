@@ -30,6 +30,19 @@ class BeritaController extends BaseController
         return view('landingpage/pagenews', $data);
     }
 
+    public function detailpageNews($slug)
+    {
+        $berita = $this->beritaModel->getBySlug($slug);
+        $pengaturan = $this->pengaturanModel->first();
+        $data = [
+            'title' => 'Berita',
+            'berita' => $berita,
+            'pengaturan' => $pengaturan
+        ];
+
+        return view('landingpage/detailpagenews', $data);
+    }
+
     public function index()
     {
         $berita = $this->beritaModel->findAll();
