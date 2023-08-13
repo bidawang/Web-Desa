@@ -16,7 +16,7 @@
                     <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
                         <p><strong><?= $b['judul_berita']; ?></strong></p>
                         <span class="text-body" id="news-content">
-                            <?= $b['isi']; ?> Selengkapnya...
+                            <?= $b['isi']; ?>
                         </span>
                         <span class="view-more" style="display: none;"></span>
                     </div>

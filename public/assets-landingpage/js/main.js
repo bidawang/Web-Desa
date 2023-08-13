@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       element.textContent = truncatedContent;
 
       var viewMoreLink = document.createElement("a");
-      viewMoreLink.textContent = "Selengkapnya";
+      viewMoreLink.textContent = "..selengkapnya";
       viewMoreLink.href = "#"; // Ganti dengan URL yang sesuai
       viewMoreLink.classList.add("view-more-link");
       viewMoreLink.addEventListener("click", function (event) {

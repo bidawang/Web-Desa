@@ -34,10 +34,21 @@ class BeritaController extends BaseController
     {
         $berita = $this->beritaModel->getBySlug($slug);
         $pengaturan = $this->pengaturanModel->first();
+
+        $days = array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
+        $months = array('', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+
+        $created_at = strtotime($berita['created_at']);
+        $day_name = $days[date('w', $created_at)];
+        $month_name = $months[date('n', $created_at)];
+
+        $formatted_date = $day_name . ', ' . date('d', $created_at) . ' ' . $month_name . ' ' . date('Y H:i', $created_at);
+
         $data = [
             'title' => 'Berita',
             'berita' => $berita,
-            'pengaturan' => $pengaturan
+            'pengaturan' => $pengaturan,
+            'formatted_date' => $formatted_date
         ];
 
         return view('landingpage/detailpagenews', $data);
