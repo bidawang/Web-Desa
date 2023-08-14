@@ -26,6 +26,18 @@ class GalleryPhotoController extends BaseController
         return view('galleryphoto/index', $data);
     }
 
+    public function page_gallery()
+    {
+        $gallery = $this->fotoModel->getFoto();
+
+        $data = [
+            'title' => 'Gallery Photo',
+            'gallery' => $gallery
+        ];
+
+        return view('landingpage/page-gallery', $data);
+    }
+
     public function detail($judul_foto)
     {
         $data = [
@@ -35,6 +47,31 @@ class GalleryPhotoController extends BaseController
 
         return view('galleryphoto/detail', $data);
     }
+
+    //function untuk carousel merubah ke 1 
+    public function active($id) {
+        // Ambil data foto berdasarkan ID
+        $gallery = $this->fotoModel->get_photo_by_id($id); // Ganti dengan metode yang sesuai di model
+
+        if ($gallery) {
+            // Ubah status carousel
+            $new_status = $gallery['carousel'] === '0' ? '1' : '0';
+
+            // Update status carousel di basis data
+            $update_data = array('carousel' => $new_status);
+            $this->fotoModel->update_photo($id, $update_data); // Ganti dengan metode yang sesuai di model
+
+            
+            // Redirect atau berikan respons sesuai kebutuhan Anda
+            session()->setFlashdata('message', 'Status carousel berhasil diubah');
+            redirect('/galleryphoto'); // Ganti dengan alamat yang sesuai
+        } else {
+            session()->setFlashdata('message', 'Gagal mengubah status carousel');
+            redirect('/galleryphoto'); // Ganti dengan alamat yang sesuai
+        }
+    }
+
+
 
     public function create()
     {

@@ -30,18 +30,21 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/village-history', 'ProfileController::VillageHistory');
-$routes->get('/vision-mission', 'ProfileController::VisionMission');
-$routes->get('/regional-potential', 'ProfileController::RegionalPotential');
+$routes->get('/dashboard', 'Home::dashboard');
+
+$routes->get('/page-news', 'BeritaController::pageNews');
+$routes->get('/page-news/(:any)', 'BeritaController::pageDetailNews/$1');
 
 $routes->get('/galleryphoto', 'GalleryPhotoController::index');
+$routes->get('/page-gallery', 'GalleryPhotoController::page_gallery');
 $routes->add('/create-galleryphoto', 'GalleryPhotoController::create');
 $routes->add('/save-galleryphoto', 'GalleryPhotoController::save');
 $routes->add('/galleryphoto/detail/(:any)', 'GalleryPhotoController::detail/$1');
 $routes->add('/galleryphoto/edit/(:num)', 'GalleryPhotoController::edit/$1');
 $routes->add('/galleryphoto/update/(:num)', 'GalleryPhotoController::update/$1');
 $routes->get('/galleryphoto/delete/(:num)', 'GalleryPhotoController::delete/$1');
-
+$routes->add('/galleryphoto/active/(:num)', 'GalleryPhotoController::active/$1');
+$routes->add('/galleryphoto/deactive/(:num)', 'GalleryPhotoController::deactive/$1');
 
 $routes->get('/video-gallery', 'GaleriVideoController::index');
 $routes->get('/create-video-gallery', 'GaleriVideoController::create');
@@ -49,6 +52,7 @@ $routes->post('/save-video-gallery', 'GaleriVideoController::save');
 $routes->get('/edit-video-gallery/(:num)', 'GaleriVideoController::edit/$1');
 $routes->post('/update-video-gallery/(:num)', 'GaleriVideoController::update/$1');
 $routes->get('/delete-video-gallery/(:num)', 'GaleriVideoController::delete/$1');
+$routes->get('/page-video-gallery', 'GaleriVideoController::pageVideoGallery');
 
 
 $routes->get('/news', 'BeritaController::index');

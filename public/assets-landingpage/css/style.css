@@ -41,6 +41,12 @@
 }
 
 /*** Button ***/
+.back-page-news {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
 .btn {
   transition: 0.5s;
   font-weight: 500;

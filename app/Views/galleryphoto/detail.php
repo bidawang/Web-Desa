@@ -38,13 +38,20 @@
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
-                                        <img src="/public/uploads/<?= $gallery['nama_foto'] ?>" class="card-img" alt="...">
+                                        <img src="/uploads/<?= $gallery['nama_foto'] ?>" class="card-img"
+                                            alt="<?= $gallery['nama_foto'] ?>">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title mb-2"><?= $gallery['judul_foto'] ?></h5>
-                                            <p class="card-text"><b>Description: <?= $gallery['deskripsi'] ?></b></p>
-                                            <p class="card-text"><small class="text-muted">Created at : <?= $gallery['created_at'] ?></small></p>
+                                            <h5 class="card-title mb-2">
+                                                <?= $gallery['judul_foto'] ?>
+                                            </h5>
+                                            <p class="card-text"><b>Description:
+                                                    <?= $gallery['deskripsi'] ?>
+                                                </b></p>
+                                            <p class="card-text"><small class="text-muted">Created at :
+                                                    <?= $gallery['created_at'] ?>
+                                                </small></p>
                                             <br>
                                             <a href="/galleryphoto"><i class="fas fa-arrow-left"></i> Back</a>
                                         </div>
