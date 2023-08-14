@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\FotoModel;
 class Home extends BaseController
 {
+    protected $fotoModel;
 
     public function __construct()
     {
@@ -21,5 +22,13 @@ class Home extends BaseController
             'gallery' => $gallery
         ];
         return view('landingpage/index', $data);
+    }
+
+    public function Dashboard(): string
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+        return view('dashboard/index', $data);
     }
 }

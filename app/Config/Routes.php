@@ -30,6 +30,8 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/dashboard', 'Home::dashboard');
+
 $routes->get('/page-news', 'BeritaController::pageNews');
 $routes->get('/page-news/(:any)', 'BeritaController::pageDetailNews/$1');
 
@@ -43,8 +45,6 @@ $routes->add('/galleryphoto/update/(:num)', 'GalleryPhotoController::update/$1')
 $routes->get('/galleryphoto/delete/(:num)', 'GalleryPhotoController::delete/$1');
 $routes->add('/galleryphoto/active/(:num)', 'GalleryPhotoController::active/$1');
 $routes->add('/galleryphoto/deactive/(:num)', 'GalleryPhotoController::deactive/$1');
-
-
 
 $routes->get('/video-gallery', 'GaleriVideoController::index');
 $routes->get('/create-video-gallery', 'GaleriVideoController::create');
