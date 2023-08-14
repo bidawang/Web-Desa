@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tea House - Tea Shop Website Template</title>
+    <title><?= $title; ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -38,7 +38,7 @@
     </div>
     <!-- Spinner End -->
 
-    
+
     <!-- Navbar Start -->
     <?= $this->include('templates_lp/navbar'); ?>
     <!-- Navbar End -->
