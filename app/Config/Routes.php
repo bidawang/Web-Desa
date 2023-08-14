@@ -48,6 +48,7 @@ $routes->post('/save-video-gallery', 'GaleriVideoController::save');
 $routes->get('/edit-video-gallery/(:num)', 'GaleriVideoController::edit/$1');
 $routes->post('/update-video-gallery/(:num)', 'GaleriVideoController::update/$1');
 $routes->get('/delete-video-gallery/(:num)', 'GaleriVideoController::delete/$1');
+$routes->get('/page-video-gallery', 'GaleriVideoController::pageVideoGallery');
 
 
 $routes->get('/news', 'BeritaController::index');
