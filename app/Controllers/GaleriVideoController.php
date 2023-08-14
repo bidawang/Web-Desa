@@ -3,17 +3,32 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\PengaturanModel;
 use App\Models\VideoModel;
 
 class GaleriVideoController extends BaseController
 {
     protected $videoModel;
+    protected $pengaturanModel;
 
     public function __construct()
     {
         $this->videoModel = new VideoModel;
+        $this->pengaturanModel = new PengaturanModel();
     }
 
+    public function pageVideoGallery()
+    {
+        $video = $this->videoModel->findAll();
+        $pengaturan = $this->pengaturanModel->first();
+        $data = [
+            'title' => 'Galeri Video',
+            'video' => $video,
+            'pengaturan' => $pengaturan,
+        ];
+
+        return view('landingpage/pagevideogallery', $data);
+    }
     public function index()
     {
         $video = $this->videoModel->findAll();

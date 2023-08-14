@@ -9,4 +9,9 @@ class BeritaModel extends Model
     protected $table = 'tb_berita';
     protected $useTimestamps = true;
     protected $allowedFields = ['slug', 'judul_berita', 'isi', 'kategori_berita', 'foto'];
+
+    public function getBySlug($slug)
+    {
+        return $this->where('slug', $slug)->first();
+    }
 }

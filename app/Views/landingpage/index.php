@@ -18,6 +18,7 @@
                                     </h1>
                                     <a href="" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
                                 </div>
+                                <span class="text-dark">Great tea assortment</span>
                             </div>
                         </div>
                     </div>
