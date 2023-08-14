@@ -18,6 +18,15 @@
                             <a href="testimonial.html" class="dropdown-item">Struktur Organisasi</a>
                             <a href="404.html" class="dropdown-item">Potensi Wilayah</a>
                         </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Galeri</a>
+                            <div class="dropdown-menu bg-light rounded-0 m-0">
+                                <a href="/page-gallery" class="dropdown-item">Foto</a>
+                                <a href="blog.html" class="dropdown-item">Video</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Berita</a>
+                        <a href="contact.html" class="nav-item nav-link">Kontak</a>
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Galeri</a>
