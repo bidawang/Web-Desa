@@ -42,6 +42,7 @@ class GalleryPhotoController extends BaseController
     {
        $gallery = $this->fotoModel->getCarousel();
 
+
         $data = [
             'title' => 'Carousel Photo',
             'gallery' => $gallery
@@ -114,7 +115,7 @@ class GalleryPhotoController extends BaseController
                 'errors' => [
                     'required' => 'Deskripsi harus diisi'
                 ]
-            ]
+            ],
         ];
 
         if (!$this->validate($validationRules)) {
@@ -126,7 +127,8 @@ class GalleryPhotoController extends BaseController
         $data = [
             'judul_foto' => $judulFoto,
             'nama_foto' => $this->request->getFile('nama_foto')->getName(),
-            'deskripsi' => $this->request->getVar('deskripsi')
+            'deskripsi' => $this->request->getVar('deskripsi'),
+            'carousel' => 1,
         ];
 
         if ($this->fotoModel->insert($data)) {

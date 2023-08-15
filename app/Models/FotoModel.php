@@ -22,9 +22,7 @@ class FotoModel extends Model
 
     public function getCarousel()
     {
-        $builder = $this->table('tb_foto');
-        $builder->where('carousel', 1);
-        return $builder->get()->getResultArray();
+        return $this->where(['carousel' => 1])->findAll();
     }
 
     public function get_photo_by_id($id)
