@@ -37,7 +37,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a class="btn btn-primary" href="/create-link">Tambah</a>
+                            <a class="btn btn-primary" href="//link/create">Tambah</a>
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>

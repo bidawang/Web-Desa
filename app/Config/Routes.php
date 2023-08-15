@@ -41,7 +41,7 @@ $routes->get('/page-news', 'BeritaController::pageNews');
 $routes->get('/page-news/(:any)', 'BeritaController::pageDetailNews/$1');
 
 $routes->get('/dashboard', 'Home::dashboard');
-// 
+
     // dashboard admin
 
     $routes->get('/photo', 'GalleryPhotoController::index');
@@ -71,13 +71,17 @@ $routes->get('/dashboard', 'Home::dashboard');
     $routes->get('/settings', 'PengaturanController::index');
     $routes->post('/settings/update', 'PengaturanController::update');
 
+    $routes->get('/link', 'linkController::index');
+    $routes->get('//link/create', 'LinkController::create');
+    $routes->post('/link/save', 'LinkController::save');
+    $routes->get('/link/edit/(:num)', 'LinkController::edit/$1');
+    $routes->post('/link/update/(:num)', 'LinkController::update/$1');
+    $routes->get('/link/delete/(:num)', 'LinkController::delete/$1');
 
-$routes->get('/login', 'AuthController::login');
-$routes->post('/auth/processLogin', 'AuthController::processLogin');
-$routes->get('/logout', 'AuthController::logout');
+    $routes->get('/login', 'AuthController::login');
+    $routes->post('/auth/processLogin', 'AuthController::processLogin');
+    $routes->get('/logout', 'AuthController::logout');
 
-$routes->get('/settings', 'PengaturanController::index');
-$routes->post('/settings/update', 'PengaturanController::update');
 
 
 

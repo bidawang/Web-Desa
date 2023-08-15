@@ -32,7 +32,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!-- form start -->
-                            <form action="/save-link" method="post">
+                            <form action="/link/save" method="post">
                                 <?= csrf_field(); ?>
                                 <div class="card-body">
                                     <div class="form-group">
