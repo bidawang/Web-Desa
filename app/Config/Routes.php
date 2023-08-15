@@ -48,6 +48,10 @@ $routes->get('/news/delete/(:num)', 'BeritaController::delete/$1');
 
 $routes->get('/settings', 'PengaturanController::index');
 $routes->post('/settings/update', 'PengaturanController::update');
+
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

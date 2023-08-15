@@ -121,6 +121,24 @@
                                             </div>
                                         <?php endif; ?>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="hari">Hari</label>
+                                        <input type="text" class="form-control <?= (session('errors.hari')) ? 'is-invalid' : ''; ?>" id="hari" name="hari" value="<?= $pengaturan['hari']; ?>">
+                                        <?php if (session('errors.hari')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.hari'); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="waktu_bisnis">Waktu Bisnis</label>
+                                        <input type="text" class="form-control <?= (session('errors.waktu_bisnis')) ? 'is-invalid' : ''; ?>" id="waktu_bisnis" name="waktu_bisnis" value="<?= $pengaturan['waktu_bisnis']; ?>">
+                                        <?php if (session('errors.waktu_bisnis')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.waktu_bisnis'); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
 
