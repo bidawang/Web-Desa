@@ -64,10 +64,10 @@ class GalleryPhotoController extends BaseController
             
             // Redirect atau berikan respons sesuai kebutuhan Anda
             session()->setFlashdata('message', 'Status carousel berhasil diubah');
-            redirect('/galleryphoto'); // Ganti dengan alamat yang sesuai
+            redirect('/photo'); // Ganti dengan alamat yang sesuai
         } else {
             session()->setFlashdata('message', 'Gagal mengubah status carousel');
-            redirect('/galleryphoto'); // Ganti dengan alamat yang sesuai
+            redirect('/photo'); // Ganti dengan alamat yang sesuai
         }
     }
 
@@ -128,14 +128,14 @@ class GalleryPhotoController extends BaseController
             session()->setFlashdata('errors', 'Data gagal ditambahkan');
         }
 
-        return redirect()->to('/galleryphoto');
+        return redirect()->to('/photo');
     }
 
     public function edit($id)
     {
         $gallery = $this->fotoModel->find($id);
         if (!$gallery) {
-            return redirect()->to('/galleryphoto')->with('errors', 'Data tidak ditemukan');
+            return redirect()->to('/photo')->with('errors', 'Data tidak ditemukan');
         }
 
         $data = [
@@ -196,14 +196,14 @@ class GalleryPhotoController extends BaseController
             session()->setFlashdata('errors', 'Data gagal diperbarui');
         }
 
-        return redirect()->to('/galleryphoto');
+        return redirect()->to('/photo');
     }
 
     public function delete($id)
     {
         $gallery = $this->fotoModel->find($id);
         if (!$gallery) {
-            return redirect()->to('/galleryphoto')->with('errors', 'Data tidak ditemukan');
+            return redirect()->to('/photo')->with('errors', 'Data tidak ditemukan');
         }
 
         if ($this->fotoModel->delete($id)) {
@@ -211,7 +211,7 @@ class GalleryPhotoController extends BaseController
         } else {
             session()->setFlashdata('errors', 'Data gagal dihapus');
         }
-        return redirect()->to('/galleryphoto');
+        return redirect()->to('/photo');
     }
 
 

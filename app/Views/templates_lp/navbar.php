@@ -9,7 +9,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
-                    <a href="index.html" class="nav-item nav-link active">Beranda</a>
+                    <a href="/" class="nav-item nav-link active">Beranda</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil Desa</a>
                         <div class="dropdown-menu bg-light rounded-0 m-0">
@@ -22,11 +22,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Galeri</a>
                         <div class="dropdown-menu bg-light rounded-0 m-0">
-                            <a href="feature.html" class="dropdown-item">Foto</a>
-                            <a href="blog.html" class="dropdown-item">Video</a>
+                            <a href="/page-gallery" class="dropdown-item">Foto</a>
+                            <a href="/page-video-gallery" class="dropdown-item">Video</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Berita</a>
+                    <a href="/page-news" class="nav-item nav-link">Berita</a>
                     <a href="contact.html" class="nav-item nav-link">Kontak</a>
                 </div>
             </div>
