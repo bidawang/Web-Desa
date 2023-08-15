@@ -4,14 +4,54 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BeritaModel;
+use App\Models\PengaturanModel;
 
 class BeritaController extends BaseController
 {
     protected $beritaModel;
+    protected $pengaturanModel;
 
     public function __construct()
     {
         $this->beritaModel = new BeritaModel();
+        $this->pengaturanModel = new PengaturanModel();
+    }
+
+    public function pageNews()
+    {
+        $berita = $this->beritaModel->findAll();
+        $pengaturan = $this->pengaturanModel->first();
+        $data = [
+            'title' => 'Berita',
+            'berita' => $berita,
+            'pengaturan' => $pengaturan
+        ];
+
+        return view('landingpage/pagenews', $data);
+    }
+
+    public function pageDetailNews($slug)
+    {
+        $berita = $this->beritaModel->getBySlug($slug);
+        $pengaturan = $this->pengaturanModel->first();
+
+        $days = array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
+        $months = array('', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+
+        $created_at = strtotime($berita['created_at']);
+        $day_name = $days[date('w', $created_at)];
+        $month_name = $months[date('n', $created_at)];
+
+        $formatted_date = $day_name . ', ' . date('d', $created_at) . ' ' . $month_name . ' ' . date('Y H:i', $created_at);
+
+        $data = [
+            'title' => 'Berita ' . ucwords(strtolower($berita['judul_berita'])),
+            'berita' => $berita,
+            'pengaturan' => $pengaturan,
+            'formatted_date' => $formatted_date
+        ];
+
+        return view('landingpage/detailpagenews', $data);
     }
 
     public function index()

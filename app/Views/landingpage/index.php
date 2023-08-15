@@ -17,6 +17,7 @@
                                     <h1 class="display-1 text-dark mb-4 animated zoomIn">Organic & Quality Tea Production
                                     </h1>
                                 </div>
+                                <span class="text-dark">Great tea assortment</span>
                             </div>
                         </div>
                     </div>
