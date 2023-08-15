@@ -56,6 +56,8 @@
                             <div class="col">
                                 <input type="file" name="nama_foto"
                                     class="form-control <?= (session('errors.nama_foto')) ? 'is-invalid' : '' ?>">
+                                <!-- tulisan max size di sebelah kiri  -->
+                                <small class="text-muted mt-2">Max Size 2MB</small>
                                 <?php if (session('errors.nama_foto')): ?>
                                     <div class="invalid-feedback">
                                         <?= session('errors.nama_foto') ?>

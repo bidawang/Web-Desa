@@ -82,12 +82,14 @@
                                     <td>
                                         <?php if ($row['carousel'] == 0): ?>
                                             <a href="<?= base_url('galleryphoto/active/' . $row['id']) ?>"
-                                                class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?')">
+                                                class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Apakah anda yakin ingin merubah carousel?')">
                                                 <i class="fas fa-times"></i></a>
                                         <?php else: ?>
                                             <a href="<?= base_url('galleryphoto/active/' . $row['id']) ?>"
-                                                class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?')"> <i
-                                                    class="fas fa-times"></i></a>
+                                                class="btn btn-primary btn-sm"
+                                                onclick="return confirm('Apakah anda yakin menonaktifkan carousel?')"> <i
+                                                    class="fas fa-check"></i></a>
                                         <?php endif; ?>
                                     </td>
 
