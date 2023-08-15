@@ -21,6 +21,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'auth'          => \App\Filters\AuthFilter::class,
+
     ];
 
     /**
@@ -32,6 +34,7 @@ class Filters extends BaseConfig
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            // 'auth' => ['except' => ['/login']], // Misalnya, kecuali untuk halaman login
         ],
         'after' => [
             'toolbar',
@@ -60,5 +63,16 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'auth' => ['before' => 
+        [
+            'news*',
+            'settings*',
+            'video/*',
+            'photo*',
+            'link*',
+            'kontak*',
+        ]
+    ],
+    ];
 }

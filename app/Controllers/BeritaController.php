@@ -4,22 +4,78 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BeritaModel;
+use App\Models\PengaturanModel;
+use App\Models\LinkModel;
+use App\Models\KontakModel;
+
 
 class BeritaController extends BaseController
 {
     protected $beritaModel;
+    protected $pengaturanModel;
+    protected $linkModel;
+    protected $kontakModel;
+
 
     public function __construct()
     {
         $this->beritaModel = new BeritaModel();
+        $this->pengaturanModel = new PengaturanModel();
+        $this->linkModel = new LinkModel();
+        $this->kontakModel = new KontakModel();
+    }
+
+    public function pageNews()
+    {
+        $berita = $this->beritaModel->findAll();
+        $pengaturan = $this->pengaturanModel->first();
+        $link = $this->linkModel->getLink();
+        $kontak = $this->kontakModel->first();
+        $data = [
+            'title' => 'Berita',
+            'berita' => $berita,
+            'pengaturan' => $pengaturan,
+            'link' => $link,
+            'kontak' => $kontak
+        ];
+
+        return view('landingpage/pagenews', $data);
+    }
+
+    public function pageDetailNews($slug)
+    {
+        $berita = $this->beritaModel->getBySlug($slug);
+        $pengaturan = $this->pengaturanModel->first();
+        $link = $this->linkModel->getLink();
+
+        $days = array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
+        $months = array('', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+
+        $created_at = strtotime($berita['created_at']);
+        $day_name = $days[date('w', $created_at)];
+        $month_name = $months[date('n', $created_at)];
+
+        $formatted_date = $day_name . ', ' . date('d', $created_at) . ' ' . $month_name . ' ' . date('Y H:i', $created_at);
+
+        $data = [
+            'title' => 'Berita ' . ucwords(strtolower($berita['judul_berita'])),
+            'berita' => $berita,
+            'pengaturan' => $pengaturan,
+            'formatted_date' => $formatted_date,
+            'link' => $link
+        ];
+
+        return view('landingpage/detailpagenews', $data);
     }
 
     public function index()
     {
         $berita = $this->beritaModel->findAll();
+        
         $data = [
             'title' => 'Berita',
-            'berita' => $berita
+            'berita' => $berita,
+            
         ];
 
         return view('berita/index', $data);
@@ -129,23 +185,26 @@ class BeritaController extends BaseController
                 'errors' => [
                     'required' => 'Kategori berita harus diisi.'
                 ]
-            ],
-            'foto' => [
+            ]
+        ];
+
+        // Check if a new photo is uploaded
+        if ($this->request->getFile('foto')->isValid()) {
+            $validationRules['foto'] = [
                 'rules' => 'uploaded[foto]|max_size[foto,2048]|is_image[foto]',
                 'errors' => [
                     'uploaded' => 'Pilih file gambar untuk foto.',
                     'max_size' => 'Ukuran file gambar maksimal 2MB.',
                     'is_image' => 'File harus berupa gambar (jpg, jpeg, png, gif).'
                 ]
-            ]
-        ];
+            ];
+        }
 
         if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
         $berita = $this->beritaModel->find($id);
-        var_dump($berita);
         if (!$berita) {
             return redirect()->to('/news')->with('error', 'Berita not found.');
         }
@@ -158,13 +217,15 @@ class BeritaController extends BaseController
             'judul_berita' => $judulBerita,
             'isi' => $this->request->getVar('isi'),
             'kategori_berita' => $this->request->getVar('kategori_berita'),
-            'foto' => $this->request->getFile('foto')->getName(),
         ];
 
-        if ($this->beritaModel->update($id, $data)) {
+        if ($this->request->getFile('foto')->isValid()) {
+            $data['foto'] = $this->request->getFile('foto')->getName();
             // Move uploaded file
             $this->request->getFile('foto')->move(ROOTPATH . 'public/uploads');
+        }
 
+        if ($this->beritaModel->update($id, $data)) {
             session()->setFlashdata('success', 'Data Berita Berhasil diupdate!');
         } else {
             session()->setFlashdata('error', 'Gagal mengupdate data berita.');

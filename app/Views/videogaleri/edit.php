@@ -32,7 +32,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!-- form start -->
-                            <form action="<?= base_url('/update-video-gallery/' . $video['id']); ?>" method="post">
+                            <form action="<?= base_url('/video/update/' . $video['id']); ?>" method="post">
                                 <?= csrf_field(); ?>
                                 <div class="card-body">
                                     <div class="form-group">
@@ -58,7 +58,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <a class="btn btn-warning" href="/video-gallery">Kembali</a>
+                                    <a class="btn btn-warning" href="/video/gallery">Kembali</a>
                                     <button type="submit" class="btn btn-primary">ubah</button>
                                 </div>
                             </form>

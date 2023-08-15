@@ -31,23 +31,72 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-$routes->get('/video-gallery', 'GaleriVideoController::index');
-$routes->get('/create-video-gallery', 'GaleriVideoController::create');
-$routes->post('/save-video-gallery', 'GaleriVideoController::save');
-$routes->get('/edit-video-gallery/(:num)', 'GaleriVideoController::edit/$1');
-$routes->post('/update-video-gallery/(:num)', 'GaleriVideoController::update/$1');
-$routes->get('/delete-video-gallery/(:num)', 'GaleriVideoController::delete/$1');
+// landingpage
+$routes->get('/village-history', 'ProfileController::VillageHistory');
+$routes->get('/vision-mission', 'ProfileController::VisionMission');
+$routes->get('/regional-potential', 'ProfileController::RegionalPotential');
+$routes->get('/page-gallery', 'GalleryPhotoController::page_gallery');
+$routes->get('/page-video-gallery', 'GaleriVideoController::pageVideoGallery');
+$routes->get('/page-news', 'BeritaController::pageNews');
+$routes->get('/page-news/(:any)', 'BeritaController::pageDetailNews/$1');
+$routes->get('/page-kontak', 'KontakController::pageKontak'); 
+$routes->get('/page-structure', 'ProfileController::StructureOrganization');
 
 
-$routes->get('/news', 'BeritaController::index');
-$routes->get('/create-news', 'BeritaController::create');
-$routes->post('/save-news', 'BeritaController::save');
-$routes->get('/news/edit/(:num)', 'BeritaController::edit/$1');
-$routes->post('/news/update/(:num)', 'BeritaController::update/$1');
-$routes->get('/news/delete/(:num)', 'BeritaController::delete/$1');
+$routes->get('/dashboard', 'Home::dashboard');
 
-$routes->get('/settings', 'PengaturanController::index');
-$routes->post('/settings/update', 'PengaturanController::update');
+    // dashboard admin
+
+    $routes->get('/photo', 'GalleryPhotoController::index');
+    $routes->add('/photo/create', 'GalleryPhotoController::create');
+    $routes->add('/photo/save', 'GalleryPhotoController::save');
+    $routes->add('/photo/detail/(:any)', 'GalleryPhotoController::detail/$1');
+    $routes->add('/photo/edit/(:num)', 'GalleryPhotoController::edit/$1');
+    $routes->add('/photo/update/(:num)', 'GalleryPhotoController::update/$1');
+    $routes->get('/photo/delete/(:num)', 'GalleryPhotoController::delete/$1');
+    $routes->add('/photo/active/(:num)', 'GalleryPhotoController::active/$1');
+    $routes->add('/photo/deactive/(:num)', 'GalleryPhotoController::deactive/$1');
+
+    $routes->get('/video/gallery', 'GaleriVideoController::index');
+    $routes->get('/video/create', 'GaleriVideoController::create');
+    $routes->post('/video/save', 'GaleriVideoController::save');
+    $routes->get('/video/edit/(:num)', 'GaleriVideoController::edit/$1');
+    $routes->post('/video/update/(:num)', 'GaleriVideoController::update/$1');
+    $routes->get('/video/delete/(:num)', 'GaleriVideoController::delete/$1');
+
+    $routes->get('/news', 'BeritaController::index');
+    $routes->get('/news/create', 'BeritaController::create');
+    $routes->post('/news/save', 'BeritaController::save');
+    $routes->get('/news/edit/(:num)', 'BeritaController::edit/$1');
+    $routes->post('/news/update/(:num)', 'BeritaController::update/$1');
+    $routes->get('/news/delete/(:num)', 'BeritaController::delete/$1');
+
+    $routes->get('/settings', 'PengaturanController::index');
+    $routes->post('/settings/update', 'PengaturanController::update');
+
+    $routes->get('/link', 'linkController::index');
+    $routes->get('/link/create', 'LinkController::create');
+    $routes->post('/link/save', 'LinkController::save');
+    $routes->get('/link/edit/(:num)', 'LinkController::edit/$1');
+    $routes->post('/link/update/(:num)', 'LinkController::update/$1');
+    $routes->get('/link/delete/(:num)', 'LinkController::delete/$1');
+
+    $routes->get('/kontak', 'KontakController::index');
+    $routes->get('/kontak/create', 'KontakController::create');
+    $routes->post('/kontak/save', 'KontakController::save');
+    $routes->get('/kontak/edit/(:num)', 'KontakController::edit/$1');
+    $routes->post('/kontak/update/(:num)', 'KontakController::update/$1');
+    $routes->get('/kontak/delete/(:num)', 'KontakController::delete/$1');
+
+
+    $routes->get('/login', 'AuthController::login');
+    $routes->post('/auth/processLogin', 'AuthController::processLogin');
+    $routes->get('/logout', 'AuthController::logout');
+
+
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

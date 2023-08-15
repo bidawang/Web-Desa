@@ -80,6 +80,27 @@ class PengaturanController extends BaseController
                     'numeric' => 'Jumlah Penduduk harus berbentuk angka!.'
                 ]
             ],
+            'hari' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Hari harus diisi.',
+                ]
+            ],
+            'waktu_bisnis' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Waktu Bisnis Penduduk harus diisi.',
+                ]
+            ],
+
+            'struktur' => [
+                'rules' => 'max_size[struktur,1024]|is_image[struktur]|mime_in[struktur,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'File yang anda pilih bukan gambar.',
+                    'mime_in' => 'File yang anda pilih bukan gambar.'
+                ]
+            ]
         ];
 
         if (!$this->validate($validationRules)) {
@@ -95,6 +116,9 @@ class PengaturanController extends BaseController
             'titik_koordinator' => $this->request->getVar('titik_koordinator'),
             'jumlah_rt' => $this->request->getVar('jumlah_rt'),
             'jumlah_penduduk' => $this->request->getVar('jumlah_penduduk'),
+            'hari' => $this->request->getVar('hari'),
+            'waktu_bisnis' => $this->request->getVar('waktu_bisnis'),
+            'struktur' => $this->request->getFile('struktur')->getName() ?? '' // jika tidak ada file yang diupload, maka akan dikosongkan
         ];
 
         if ($this->pengaturanModel->update(1, $data)) {
