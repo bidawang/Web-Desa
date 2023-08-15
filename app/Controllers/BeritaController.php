@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\BeritaModel;
 use App\Models\PengaturanModel;
 use App\Models\LinkModel;
+use App\Models\KontakModel;
 
 
 class BeritaController extends BaseController
@@ -13,6 +14,7 @@ class BeritaController extends BaseController
     protected $beritaModel;
     protected $pengaturanModel;
     protected $linkModel;
+    protected $kontakModel;
 
 
     public function __construct()
@@ -20,6 +22,7 @@ class BeritaController extends BaseController
         $this->beritaModel = new BeritaModel();
         $this->pengaturanModel = new PengaturanModel();
         $this->linkModel = new LinkModel();
+        $this->kontakModel = new KontakModel();
     }
 
     public function pageNews()
@@ -27,11 +30,13 @@ class BeritaController extends BaseController
         $berita = $this->beritaModel->findAll();
         $pengaturan = $this->pengaturanModel->first();
         $link = $this->linkModel->getLink();
+        $kontak = $this->kontakModel->first();
         $data = [
             'title' => 'Berita',
             'berita' => $berita,
             'pengaturan' => $pengaturan,
-            'link' => $link
+            'link' => $link,
+            'kontak' => $kontak
         ];
 
         return view('landingpage/pagenews', $data);
@@ -41,6 +46,7 @@ class BeritaController extends BaseController
     {
         $berita = $this->beritaModel->getBySlug($slug);
         $pengaturan = $this->pengaturanModel->first();
+        $link = $this->linkModel->getLink();
 
         $days = array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
         $months = array('', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
@@ -55,7 +61,8 @@ class BeritaController extends BaseController
             'title' => 'Berita ' . ucwords(strtolower($berita['judul_berita'])),
             'berita' => $berita,
             'pengaturan' => $pengaturan,
-            'formatted_date' => $formatted_date
+            'formatted_date' => $formatted_date,
+            'link' => $link
         ];
 
         return view('landingpage/detailpagenews', $data);

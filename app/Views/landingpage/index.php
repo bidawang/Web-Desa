@@ -14,14 +14,11 @@
                                 <div class="container">
                                     <div class="row justify-content-center">
                                         <div class="col-lg-7 text-center">
-                                            <p class="fs-4 text-white animated zoomIn">Welcome to <strong
-                                                    class="text-dark">TEA
-                                                    House</strong></p>
-                                            <h1 class="display-1 text-dark mb-4 animated zoomIn">Organic & Quality Tea
-                                                Production
+                                            <p class="fs-4 text-white animated zoomIn">Selamat Datang di <strong class="text-dark text-bold" >Wesbsite</strong> Resmi</p>
+                                            <h1 class="display-1 text-dark mb-4 animated zoomIn">
+                                            <?= $pengaturan['nama_desa']?>
                                             </h1>
-                                        </div>
-                                        <span class="text-dark">Great tea assortment</span>
+                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -135,35 +132,34 @@
 <div class="container-xxl contact py-5">
     <div class="container">
         <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <p class="fs-5 fw-medium fst-italic text-primary">Contact Us</p>
-            <h1 class="display-6">Contact us right now</h1>
+            <p class="fs-5 fw-medium fst-italic text-primary">Kontak Kami</p>
+            <h1 class="display-6"></h1>
         </div>
         <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
             <div class="col-lg-8">
-                <p class="text-center mb-5">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et
-                    lorem et sit, sed stet lorem sit clita duo justo Diam dolor diam ipsum sit. Aliqu diam amet diam et
-                    eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
+                <p class="text-center mb-5">
+                <?= $kontak['deskripsi'] ?>   
+                </p>
                 <div class="row g-5">
                     <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.3s">
                         <div class="btn-square mx-auto mb-3">
                             <i class="fa fa-envelope fa-2x text-white"></i>
                         </div>
-                        <p class="mb-2">info@example.com</p>
-                        <p class="mb-0">support@example.com</p>
+                        <p class="mb-2"><?= $kontak['email'] ?></p>
+                        <p class="mb-0"><?= $kontak['email'] ?></p>
                     </div>
                     <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.4s">
                         <div class="btn-square mx-auto mb-3">
                             <i class="fa fa-phone fa-2x text-white"></i>
                         </div>
-                        <p class="mb-2">+012 345 67890</p>
-                        <p class="mb-0">+012 345 67890</p>
+                        <p class="mb-2"><?= $kontak['no_telp'] ?></p>
+                        <p class="mb-0"><?= $kontak['no_telp'] ?></p>
                     </div>
                     <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.5s">
                         <div class="btn-square mx-auto mb-3">
                             <i class="fa fa-map-marker-alt fa-2x text-white"></i>
                         </div>
-                        <p class="mb-2">123 Street</p>
-                        <p class="mb-0">New York, USA</p>
+                        <p class="mb-2"><?= $kontak['alamat'] ?></p>
                     </div>
                 </div>
             </div>

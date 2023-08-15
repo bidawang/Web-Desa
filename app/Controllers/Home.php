@@ -7,6 +7,7 @@ use App\Models\FotoModel;
 use App\Models\LinkModel;
 use App\Models\PengaturanModel;
 use App\Models\VideoModel;
+use App\Models\KontakModel;
 
 class Home extends BaseController
 {
@@ -15,6 +16,7 @@ class Home extends BaseController
     protected $videoModel;
     protected $pengaturanModel;
     protected $linkModel;
+    protected $kontakModel;
 
     public function __construct()
     {
@@ -23,6 +25,7 @@ class Home extends BaseController
         $this->videoModel = new VideoModel();
         $this->pengaturanModel = new PengaturanModel();
         $this->linkModel = new LinkModel();
+        $this->kontakModel = new KontakModel();
     }
 
     public function index(): string
@@ -33,6 +36,9 @@ class Home extends BaseController
         $video = $this->videoModel->findAll();
         $pengaturan = $this->pengaturanModel->first();
         $link = $this->linkModel->getLink();
+        $kontak = $this->kontakModel->first();
+        // dd($kontak[0]['deskripsi']);
+
 
         $data = [
             'title' => 'Desa',
@@ -40,7 +46,8 @@ class Home extends BaseController
             'berita' => $berita,
             'video' => $video,
             'pengaturan' => $pengaturan,
-            'link' => $link
+            'link' => $link,
+            'kontak' => $kontak
         ];
         return view('landingpage/index', $data);
     }

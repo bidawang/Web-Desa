@@ -92,6 +92,15 @@ class PengaturanController extends BaseController
                     'required' => 'Waktu Bisnis Penduduk harus diisi.',
                 ]
             ],
+
+            'struktur' => [
+                'rules' => 'max_size[struktur,1024]|is_image[struktur]|mime_in[struktur,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'File yang anda pilih bukan gambar.',
+                    'mime_in' => 'File yang anda pilih bukan gambar.'
+                ]
+            ]
         ];
 
         if (!$this->validate($validationRules)) {
@@ -109,6 +118,7 @@ class PengaturanController extends BaseController
             'jumlah_penduduk' => $this->request->getVar('jumlah_penduduk'),
             'hari' => $this->request->getVar('hari'),
             'waktu_bisnis' => $this->request->getVar('waktu_bisnis'),
+            'struktur' => $this->request->getFile('struktur')->getName() ?? '' // jika tidak ada file yang diupload, maka akan dikosongkan
         ];
 
         if ($this->pengaturanModel->update(1, $data)) {

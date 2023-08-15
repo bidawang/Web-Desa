@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\FotoModel;
 use App\Models\LinkModel;
 use App\Controllers\BaseController;
+use App\Models\KontakModel;
 
 
 class GalleryPhotoController extends BaseController
@@ -12,12 +13,14 @@ class GalleryPhotoController extends BaseController
     protected $fotoModel;
     protected $linkModel;
     protected $pengaturanModel;
+    protected $kontakModel;
 
     public function __construct()
     {
         $this->fotoModel = new FotoModel();
         $this->linkModel = new LinkModel();
         $this->pengaturanModel = new \App\Models\PengaturanModel();
+        $this->kontakModel = new KontakModel();
     }
 
     public function index()
@@ -38,12 +41,14 @@ class GalleryPhotoController extends BaseController
         $gallery = $this->fotoModel->getFoto();
         $link = $this->linkModel->getLink();
         $pengaturan = $this->pengaturanModel->first();
+        $kontak = $this->kontakModel->first();
 
         $data = [
             'title' => 'Gallery Photo',
             'gallery' => $gallery,
             'link' => $link,
-            'pengaturan' => $pengaturan
+            'pengaturan' => $pengaturan,
+            'kontak' => $kontak
 
         ];
 

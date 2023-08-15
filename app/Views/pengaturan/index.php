@@ -139,6 +139,25 @@
                                             </div>
                                         <?php endif; ?>
                                     </div>
+                                    <!-- struktur type image -->
+                                    <div class="form-group">
+                                        <label for="struktur">Struktur</label>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <img src="public/uploads/<?= $pengaturan['struktur']; ?>" class="img-thumbnail img-preview">
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input <?= (session('errors.struktur')) ? 'is-invalid' : ''; ?>" id="struktur" name="struktur" onchange="previewImg()">
+                                                    <label class="custom-file-label" for="struktur"><?= $pengaturan['struktur']; ?></label>
+                                                    <?php if (session('errors.struktur')) : ?>
+                                                        <div class="invalid-feedback">
+                                                            <?= session('errors.struktur'); ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                                 <!-- /.card-body -->
 

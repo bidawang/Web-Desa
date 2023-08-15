@@ -39,6 +39,9 @@ $routes->get('/page-gallery', 'GalleryPhotoController::page_gallery');
 $routes->get('/page-video-gallery', 'GaleriVideoController::pageVideoGallery');
 $routes->get('/page-news', 'BeritaController::pageNews');
 $routes->get('/page-news/(:any)', 'BeritaController::pageDetailNews/$1');
+$routes->get('/page-kontak', 'KontakController::pageKontak'); 
+$routes->get('/page-structure', 'ProfileController::StructureOrganization');
+
 
 $routes->get('/dashboard', 'Home::dashboard');
 
@@ -77,6 +80,14 @@ $routes->get('/dashboard', 'Home::dashboard');
     $routes->get('/link/edit/(:num)', 'LinkController::edit/$1');
     $routes->post('/link/update/(:num)', 'LinkController::update/$1');
     $routes->get('/link/delete/(:num)', 'LinkController::delete/$1');
+
+    $routes->get('/kontak', 'KontakController::index');
+    $routes->get('/kontak/create', 'KontakController::create');
+    $routes->post('/kontak/save', 'KontakController::save');
+    $routes->get('/kontak/edit/(:num)', 'KontakController::edit/$1');
+    $routes->post('/kontak/update/(:num)', 'KontakController::update/$1');
+    $routes->get('/kontak/delete/(:num)', 'KontakController::delete/$1');
+
 
     $routes->get('/login', 'AuthController::login');
     $routes->post('/auth/processLogin', 'AuthController::processLogin');
