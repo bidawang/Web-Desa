@@ -76,6 +76,12 @@ $routes->get('/login', 'AuthController::login');
 $routes->post('/auth/processLogin', 'AuthController::processLogin');
 $routes->get('/logout', 'AuthController::logout');
 
+$routes->get('/settings', 'PengaturanController::index');
+$routes->post('/settings/update', 'PengaturanController::update');
+
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
