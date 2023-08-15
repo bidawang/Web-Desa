@@ -26,6 +26,30 @@ class GalleryPhotoController extends BaseController
         return view('galleryphoto/index', $data);
     }
 
+    public function page_gallery()
+    {
+        $gallery = $this->fotoModel->getFoto();
+
+        $data = [
+            'title' => 'Gallery Photo',
+            'gallery' => $gallery
+        ];
+
+        return view('landingpage/page-gallery', $data);
+    }
+
+    public function carousel()
+    {
+       $gallery = $this->fotoModel->getCarousel();
+
+        $data = [
+            'title' => 'Carousel Photo',
+            'gallery' => $gallery
+        ];
+
+        return view('landingpage/index', $data);
+    }
+
     public function detail($judul_foto)
     {
         $data = [
@@ -35,6 +59,28 @@ class GalleryPhotoController extends BaseController
 
         return view('galleryphoto/detail', $data);
     }
+
+    //function untuk carousel merubah ke 1 
+    public function active($id)
+    {
+        $fotoModel = new FotoModel();
+
+        // Ambil data foto berdasarkan ID
+        $photo = $fotoModel->find($id); // Ganti dengan metode yang sesuai di model
+
+        if ($photo) {
+            // Jika foto ditemukan, ubah nilai atribut carousel menjadi 1
+            $data = ['carousel' => 1];
+            $fotoModel->update($id, $data);
+
+
+            return redirect()->to(base_url('galleryphoto'))->with('success', 'Atribut carousel telah diubah.');
+        } else {
+            return redirect()->to(base_url('galleryphoto'))->with('error', 'Foto tidak ditemukan.');
+        }
+    }
+
+
 
     public function create()
     {
@@ -91,14 +137,14 @@ class GalleryPhotoController extends BaseController
             session()->setFlashdata('errors', 'Data gagal ditambahkan');
         }
 
-        return redirect()->to('/galleryphoto');
+        return redirect()->to('/photo');
     }
 
     public function edit($id)
     {
         $gallery = $this->fotoModel->find($id);
         if (!$gallery) {
-            return redirect()->to('/galleryphoto')->with('errors', 'Data tidak ditemukan');
+            return redirect()->to('/photo')->with('errors', 'Data tidak ditemukan');
         }
 
         $data = [
@@ -159,14 +205,14 @@ class GalleryPhotoController extends BaseController
             session()->setFlashdata('errors', 'Data gagal diperbarui');
         }
 
-        return redirect()->to('/galleryphoto');
+        return redirect()->to('/photo');
     }
 
     public function delete($id)
     {
         $gallery = $this->fotoModel->find($id);
         if (!$gallery) {
-            return redirect()->to('/galleryphoto')->with('errors', 'Data tidak ditemukan');
+            return redirect()->to('/photo')->with('errors', 'Data tidak ditemukan');
         }
 
         if ($this->fotoModel->delete($id)) {
@@ -174,7 +220,7 @@ class GalleryPhotoController extends BaseController
         } else {
             session()->setFlashdata('errors', 'Data gagal dihapus');
         }
-        return redirect()->to('/galleryphoto');
+        return redirect()->to('/photo');
     }
 
 

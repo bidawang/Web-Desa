@@ -31,7 +31,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="/create-news" class="btn btn-primary">Tambah Data +</a>
+                            <a href="/news/create" class="btn btn-primary">Tambah Data +</a>
                             <?php if (session('success')) : ?>
                                 <div class="alert alert-success alert-dismissible mt-3">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

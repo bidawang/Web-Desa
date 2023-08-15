@@ -95,6 +95,15 @@
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
+                                        <label for="titik_koordinator">Titik Koordinat</label>
+                                        <input type="text" class="form-control <?= (session('errors.titik_koordinator')) ? 'is-invalid' : ''; ?>" id="titik_koordinator" name="titik_koordinator" value="<?= $pengaturan['titik_koordinator']; ?>">
+                                        <?php if (session('errors.titik_koordinator')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.titik_koordinator'); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="jumlah_rt">Jumlah RT</label>
                                         <input type="text" class="form-control <?= (session('errors.jumlah_rt')) ? 'is-invalid' : ''; ?>" id="jumlah_rt" name="jumlah_rt" value="<?= $pengaturan['jumlah_rt']; ?>">
                                         <?php if (session('errors.jumlah_rt')) : ?>
@@ -109,6 +118,24 @@
                                         <?php if (session('errors.jumlah_penduduk')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= session('errors.jumlah_penduduk'); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hari">Hari</label>
+                                        <input type="text" class="form-control <?= (session('errors.hari')) ? 'is-invalid' : ''; ?>" id="hari" name="hari" value="<?= $pengaturan['hari']; ?>">
+                                        <?php if (session('errors.hari')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.hari'); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="waktu_bisnis">Waktu Bisnis</label>
+                                        <input type="text" class="form-control <?= (session('errors.waktu_bisnis')) ? 'is-invalid' : ''; ?>" id="waktu_bisnis" name="waktu_bisnis" value="<?= $pengaturan['waktu_bisnis']; ?>">
+                                        <?php if (session('errors.waktu_bisnis')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.waktu_bisnis'); ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>

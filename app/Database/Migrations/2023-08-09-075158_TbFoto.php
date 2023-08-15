@@ -13,7 +13,7 @@ class TbFoto extends Migration
             'judul_foto' => ['type' => 'VARCHAR', 'constraint' => 255],
             'nama_foto' => ['type' => 'VARCHAR', 'constraint' => 255],
             'deskripsi' => ['type' => 'TEXT'],
-            'carousel' => ['type' => 'ENUM("0","1")', 'default' => '0'],
+            'carousel' => ['type' => 'VARCHAR', 'constraint' => 10, 'null' => true],
             'created_at' => ['type' => 'DATETIME', 'null' => true],
             'updated_at' => ['type' => 'DATETIME', 'null' => true],
             'deleted_at' => ['type' => 'DATETIME', 'null' => true],

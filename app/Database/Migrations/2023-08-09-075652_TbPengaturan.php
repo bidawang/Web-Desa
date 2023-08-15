@@ -18,6 +18,8 @@ class TbPengaturan extends Migration
             'titik_koordinator' => ['type' => 'VARCHAR', 'constraint' => 255],
             'jumlah_rt'       => ['type' => 'INT', 'constraint' => 5],
             'jumlah_penduduk' => ['type' => 'INT', 'constraint' => 10],
+            'hari'            => ['type' => 'VARCHAR', 'constraint' => 50], // Tambahkan atribut hari
+            'waktu_bisnis'    => ['type' => 'VARCHAR', 'constraint' => 100], // Tambahkan atribut waktu_bisnis
             'created_at'      => ['type' => 'DATETIME', 'null' => true],
             'updated_at'      => ['type' => 'DATETIME', 'null' => true],
             'deleted_at'      => ['type' => 'DATETIME', 'null' => true],
