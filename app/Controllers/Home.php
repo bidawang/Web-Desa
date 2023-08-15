@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\BeritaModel;
 use App\Models\FotoModel;
+use App\Models\LinkModel;
 use App\Models\PengaturanModel;
 use App\Models\VideoModel;
 
@@ -13,6 +14,7 @@ class Home extends BaseController
     protected $beritaModel;
     protected $videoModel;
     protected $pengaturanModel;
+    protected $linkModel;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class Home extends BaseController
         $this->beritaModel = new BeritaModel();
         $this->videoModel = new VideoModel();
         $this->pengaturanModel = new PengaturanModel();
+        $this->linkModel = new LinkModel();
     }
 
     public function index(): string
@@ -29,13 +32,15 @@ class Home extends BaseController
         $berita = $this->beritaModel->findAll();
         $video = $this->videoModel->findAll();
         $pengaturan = $this->pengaturanModel->first();
+        $link = $this->linkModel->getLink();
 
         $data = [
             'title' => 'Desa',
             'gallery' => $gallery,
             'berita' => $berita,
             'video' => $video,
-            'pengaturan' => $pengaturan
+            'pengaturan' => $pengaturan,
+            'link' => $link
         ];
         return view('landingpage/index', $data);
     }
