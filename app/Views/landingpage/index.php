@@ -16,7 +16,6 @@
                                             House</strong></p>
                                     <h1 class="display-1 text-dark mb-4 animated zoomIn">Organic & Quality Tea Production
                                     </h1>
-                                    <a href="" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
                                 </div>
                             </div>
                         </div>
