@@ -80,6 +80,18 @@ class PengaturanController extends BaseController
                     'numeric' => 'Jumlah Penduduk harus berbentuk angka!.'
                 ]
             ],
+            'hari' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Hari harus diisi.',
+                ]
+            ],
+            'waktu_bisnis' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Waktu Bisnis Penduduk harus diisi.',
+                ]
+            ],
         ];
 
         if (!$this->validate($validationRules)) {
@@ -95,6 +107,8 @@ class PengaturanController extends BaseController
             'titik_koordinator' => $this->request->getVar('titik_koordinator'),
             'jumlah_rt' => $this->request->getVar('jumlah_rt'),
             'jumlah_penduduk' => $this->request->getVar('jumlah_penduduk'),
+            'hari' => $this->request->getVar('hari'),
+            'waktu_bisnis' => $this->request->getVar('waktu_bisnis'),
         ];
 
         if ($this->pengaturanModel->update(1, $data)) {

@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Galeri Video</h1>
+                    <h1 class="m-0">Quick Link</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -27,26 +27,26 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Data Galeri Video</h3>
+                            <h3 class="card-title">Tambah Data Quick Link</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!-- form start -->
-                            <form action="/video/save" method="post">
+                            <form action="/link/save" method="post">
                                 <?= csrf_field(); ?>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="judul_video">Judul Video</label>
-                                        <input type="text" class="form-control <?= (session('errors.judul_video')) ? 'is-invalid' : ''; ?>" id="judul_video" name="judul_video" placeholder="Tambahkan Judul Video" value="<?= old('judul_video'); ?>">
-                                        <?php if (session('errors.judul_video')) : ?>
+                                        <label for="nama">Nama</label>
+                                        <input type="text" class="form-control <?= (session('errors.nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" placeholder="Tambahkan Nama Quick Link" value="<?= old('nama'); ?>">
+                                        <?php if (session('errors.nama')) : ?>
                                             <div class="invalid-feedback">
-                                                <?= session('errors.judul_video'); ?>
+                                                <?= session('errors.nama'); ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
-                                        <label for="link">Link Video</label>
-                                        <input type="text" class="form-control <?= (session('errors.link')) ? 'is-invalid' : ''; ?>" id="link" name="link" placeholder="Tambahkan Link Video yang Bersala Dari Youtube" value="<?= old('link'); ?>">
+                                        <label for="link">Link</label>
+                                        <input type="text" class="form-control <?= (session('errors.link')) ? 'is-invalid' : ''; ?>" id="link" name="link" placeholder="Tambahkan Link" value="<?= old('link'); ?>">
                                         <?php if (session('errors.link')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= session('errors.link'); ?>
@@ -57,7 +57,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <a class="btn btn-warning" href="/video/gallery">Kembali</a>
+                                    <a class="btn btn-warning" href="/link">Kembali</a>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>

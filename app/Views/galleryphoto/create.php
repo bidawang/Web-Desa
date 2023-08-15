@@ -40,7 +40,7 @@
                     <?php endif; ?>
 
 
-                    <form action="<?= base_url('/save-galleryphoto') ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('/photo/save') ?>" method="post" enctype="multipart/form-data">
                         <?= csrf_field() ?>
                         <div class="row">
                             <div class="col">

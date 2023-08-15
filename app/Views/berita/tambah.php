@@ -32,7 +32,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!-- form start -->
-                            <form action="<?= base_url('/save-news'); ?>" method="post" enctype="multipart/form-data">
+                            <form action="<?= base_url('/news/save'); ?>" method="post" enctype="multipart/form-data">
                                 <?= csrf_field(); ?>
                                 <div class="card-body">
                                     <div class="form-group">

@@ -53,7 +53,7 @@
                                                     <?= $gallery['created_at'] ?>
                                                 </small></p>
                                             <br>
-                                            <a href="/galleryphoto"><i class="fas fa-arrow-left"></i> Back</a>
+                                            <a href="/photo"><i class="fas fa-arrow-left"></i> Back</a>
                                         </div>
                                     </div>
                                 </div>

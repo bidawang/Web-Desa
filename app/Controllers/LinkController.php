@@ -3,71 +3,55 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\PengaturanModel;
-use App\Models\VideoModel;
+use App\Models\LinkModel;
 
-class GaleriVideoController extends BaseController
+class LinkController extends BaseController
 {
-    protected $videoModel;
-    protected $pengaturanModel;
+    protected $linkModel;
 
     public function __construct()
     {
-        $this->videoModel = new VideoModel;
-        $this->pengaturanModel = new PengaturanModel();
+        $this->linkModel = new LinkModel();
     }
 
-    public function pageVideoGallery()
-    {
-        $video = $this->videoModel->findAll();
-        $pengaturan = $this->pengaturanModel->first();
-        $data = [
-            'title' => 'Galeri Video',
-            'video' => $video,
-            'pengaturan' => $pengaturan,
-        ];
-
-        return view('landingpage/pagevideogallery', $data);
-    }
     public function index()
     {
-        
-        $video = $this->videoModel->findAll();
+        $link = $this->linkModel->findAll();
         $data = [
-            'title' => 'Galeri Video',
-            'video' => $video
+            'title' => 'Quick Link',
+            'link' => $link,
         ];
 
-        return view('videogaleri/index', $data);
+        return view('link/index', $data);
     }
 
-    // function tampil halaman tambah data video
+    // function tampil halaman tambah data quick link
     public function create()
     {
         $data = [
-            'title' => 'Tambah Data Video',
+            'title' => 'Tambah Data Quick Link',
             'validation' => \Config\Services::validation()
         ];
 
-        return view('videogaleri/tambah', $data);
+        return view('link/tambah', $data);
     }
 
-    // function save data video
+    // function save data quick link
     public function save()
     {
         $validationRules = [
 
-            'judul_video' => [
+            'nama' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom Judul Video Harus Diisi',
+                    'required' => 'Kolom Nama Harus Diisi',
                 ]
             ],
             'link' => [
                 'rules' => 'required|valid_url_strict',
                 'errors' => [
                     'required' => 'Kolom Link Harus Diisi',
-                    'valid_url_strict' => 'Kolom Harus Diisi Dengan Link yang Berasal Dari youtube.com'
+                    'valid_url_strict' => 'Kolom Harus Diisi Dengan Link yang Valid'
                 ]
             ]
         ];
@@ -77,62 +61,62 @@ class GaleriVideoController extends BaseController
         }
 
         // ambil data dari form
-        $judul_video = $this->request->getPost('judul_video');
+        $nama = $this->request->getPost('nama');
         $link = $this->request->getPost('link');
 
         // membuat array collection yang disiapkan untuk insert ke table
         $data = [
-            'judul_video' => $judul_video,
+            'nama' => $nama,
             'link' => $link,
         ];
 
         // insert ke table
-        $simpan = $this->videoModel->insert($data);
+        $simpan = $this->linkModel->insert($data);
 
 
         // cek jika proses simpan gagal
         if (!$simpan) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal ditambahkan!');
-            return redirect()->to('/video/create');
+            return redirect()->to('/link/edit');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil ditambahkan!');
-            return redirect()->to('/video/gallery');
+            return redirect()->to('/link');
         }
     }
 
-    // function edit data video
+    // function edit data quick link
     public function edit($id)
     {
 
         $data = [
-            'title' => 'Edit Data Video',
+            'title' => 'Edit Data Quick Link',
             'validation' => \Config\Services::validation(),
-            'video' => $this->videoModel->find($id)
+            'link' => $this->linkModel->find($id)
         ];
 
-        return view('videogaleri/edit', $data);
+        return view('link/edit', $data);
     }
 
-    // function update data video
+    // function update data quick link
     public function update($id)
     {
         $validationRules = [
 
-            'judul_video' => [
+            'nama' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom Judul Video Harus Diisi',
+                    'required' => 'Kolom Nama Harus Diisi',
                 ]
             ],
             'link' => [
                 'rules' => 'required|valid_url_strict',
                 'errors' => [
                     'required' => 'Kolom Link Harus Diisi',
-                    'valid_url_strict' => 'Kolom Harus Diisi Dengan Link yang Berasal Dari youtube.com'
+                    'valid_url_strict' => 'Kolom Harus Diisi Dengan Link yang Valid'
                 ]
             ]
         ];
@@ -142,50 +126,50 @@ class GaleriVideoController extends BaseController
         }
 
         // ambil data dari form
-        $judul_video = $this->request->getPost('judul_video');
+        $nama = $this->request->getPost('nama');
         $link = $this->request->getPost('link');
 
         // membuat array collection yang disiapkan untuk insert ke table
         $data = [
-            'judul_video' => $judul_video,
+            'nama' => $nama,
             'link' => $link,
         ];
 
         // insert ke table
-        $ubah = $this->videoModel->update($id, $data);
+        $ubah = $this->linkModel->update($id, $data);
 
 
         // cek jika proses simpan gagal
         if (!$ubah) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal diubah!');
-            return redirect()->to('/edit-video-gallery');
+            return redirect()->to('/link');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil diubah!');
-            return redirect()->to('/video/gallery');
+            return redirect()->to('/link');
         }
     }
 
-    // function delete data video
+    // function delete data quick link
     public function delete($id)
     {
         // menghapus data
-        $hapus = $this->videoModel->delete($id);
+        $hapus = $this->linkModel->delete($id);
 
         // cek jika proses hapus gagal
         if (!$hapus) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal dihapus!');
-            return redirect()->to('/video/gallery');
+            return redirect()->to('/link');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil dihapus!');
-            return redirect()->to('/video/gallery');
+            return redirect()->to('/link');
         }
     }
 }
