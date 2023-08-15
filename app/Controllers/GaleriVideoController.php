@@ -3,19 +3,35 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\PengaturanModel;
 use App\Models\VideoModel;
 
 class GaleriVideoController extends BaseController
 {
     protected $videoModel;
+    protected $pengaturanModel;
 
     public function __construct()
     {
         $this->videoModel = new VideoModel;
+        $this->pengaturanModel = new PengaturanModel();
     }
 
+    public function pageVideoGallery()
+    {
+        $video = $this->videoModel->findAll();
+        $pengaturan = $this->pengaturanModel->first();
+        $data = [
+            'title' => 'Galeri Video',
+            'video' => $video,
+            'pengaturan' => $pengaturan,
+        ];
+
+        return view('landingpage/pagevideogallery', $data);
+    }
     public function index()
     {
+        
         $video = $this->videoModel->findAll();
         $data = [
             'title' => 'Galeri Video',
@@ -78,13 +94,13 @@ class GaleriVideoController extends BaseController
         if (!$simpan) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal ditambahkan!');
-            return redirect()->to('/create-video-gallery');
+            return redirect()->to('/video/create');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil ditambahkan!');
-            return redirect()->to('/video-gallery');
+            return redirect()->to('/video/gallery');
         }
     }
 
@@ -149,7 +165,7 @@ class GaleriVideoController extends BaseController
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil diubah!');
-            return redirect()->to('/video-gallery');
+            return redirect()->to('/video/gallery');
         }
     }
 
@@ -163,13 +179,13 @@ class GaleriVideoController extends BaseController
         if (!$hapus) {
             // redirect ke halaman create
             session()->setFlashdata('pesan', 'Data Gagal dihapus!');
-            return redirect()->to('/video-gallery');
+            return redirect()->to('/video/gallery');
         }
         // jika berhasil
         else {
             // redirect ke halaman index
             session()->setFlashdata('pesan', 'Data Berhasil dihapus!');
-            return redirect()->to('/video-gallery');
+            return redirect()->to('/video/gallery');
         }
     }
 }

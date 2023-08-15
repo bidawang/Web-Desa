@@ -34,10 +34,11 @@
                                 </div>
                             <?php endif; ?>
                             <h3 class="card-title">Data Galeri Video</h3><br>
-                            <a class="btn btn-primary" href="/create-video-gallery">Tambah</a>
+                            
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                        <a class="btn btn-primary" href="/video/create">Tambah Data +</a>
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -61,8 +62,8 @@
                                                 <?= date("d-m-Y", strtotime($row['created_at'])); ?>
                                             </td>
                                             <td>
-                                                <a href="<?= base_url('/edit-video-gallery/' . $row['id']); ?>" class="btn btn-sm btn-warning">Edit</a>
-                                                <a href="<?= base_url('/delete-video-gallery/' . $row['id']); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Berita Ini?')">Delete</a>
+                                                <a href="<?= base_url('/video/edit' . $row['id']); ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                <a href="<?= base_url('/video/delete/' . $row['id']); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Berita Ini?')">Delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
