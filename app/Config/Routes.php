@@ -72,7 +72,7 @@ $routes->get('/dashboard', 'Home::dashboard');
     $routes->post('/settings/update', 'PengaturanController::update');
 
     $routes->get('/link', 'linkController::index');
-    $routes->get('//link/create', 'LinkController::create');
+    $routes->get('/link/create', 'LinkController::create');
     $routes->post('/link/save', 'LinkController::save');
     $routes->get('/link/edit/(:num)', 'LinkController::edit/$1');
     $routes->post('/link/update/(:num)', 'LinkController::update/$1');

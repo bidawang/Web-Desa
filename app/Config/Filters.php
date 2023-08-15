@@ -70,6 +70,7 @@ class Filters extends BaseConfig
             'settings*',
             'video/*',
             'photo*',
+            'link*',
         ]
     ],
     ];

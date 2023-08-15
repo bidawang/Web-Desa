@@ -45,6 +45,7 @@ class Home extends BaseController
         return view('landingpage/index', $data);
     }
 
+
     public function Dashboard(): string
     {
         $data = [

@@ -5,26 +5,32 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\PengaturanModel;
 use App\Models\VideoModel;
+use App\Models\LinkModel;
 
 class GaleriVideoController extends BaseController
 {
     protected $videoModel;
     protected $pengaturanModel;
+    protected $linkModel;
+
 
     public function __construct()
     {
         $this->videoModel = new VideoModel;
         $this->pengaturanModel = new PengaturanModel();
+        $this->linkModel = new LinkModel();
     }
 
     public function pageVideoGallery()
     {
         $video = $this->videoModel->findAll();
         $pengaturan = $this->pengaturanModel->first();
+        $link = $this->linkModel->getLink();
         $data = [
             'title' => 'Galeri Video',
             'video' => $video,
             'pengaturan' => $pengaturan,
+            'link' => $link,
         ];
 
         return view('landingpage/pagevideogallery', $data);
@@ -33,9 +39,11 @@ class GaleriVideoController extends BaseController
     {
         
         $video = $this->videoModel->findAll();
+        
         $data = [
             'title' => 'Galeri Video',
-            'video' => $video
+            'video' => $video,
+            
         ];
 
         return view('videogaleri/index', $data);

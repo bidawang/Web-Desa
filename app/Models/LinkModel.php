@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class LinkModel extends Model
 {
-    protected $table            = 'tb_link';
+    protected $table         = 'tb_link';
     protected $useTimestamps = false;
     protected $allowedFields    = ['nama', 'link'];
 

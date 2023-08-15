@@ -3,24 +3,31 @@
 namespace App\Controllers;
 
 use App\Models\FotoModel;
+use App\Models\LinkModel;
 use App\Controllers\BaseController;
+
 
 class GalleryPhotoController extends BaseController
 {
     protected $fotoModel;
+    protected $linkModel;
+    protected $pengaturanModel;
 
     public function __construct()
     {
         $this->fotoModel = new FotoModel();
+        $this->linkModel = new LinkModel();
+        $this->pengaturanModel = new \App\Models\PengaturanModel();
     }
 
     public function index()
     {
         $gallery = $this->fotoModel->getFoto();
-
+        
         $data = [
             'title' => 'Gallery Photo',
-            'gallery' => $gallery
+            'gallery' => $gallery,
+            
         ];
 
         return view('galleryphoto/index', $data);
@@ -29,10 +36,15 @@ class GalleryPhotoController extends BaseController
     public function page_gallery()
     {
         $gallery = $this->fotoModel->getFoto();
+        $link = $this->linkModel->getLink();
+        $pengaturan = $this->pengaturanModel->first();
 
         $data = [
             'title' => 'Gallery Photo',
-            'gallery' => $gallery
+            'gallery' => $gallery,
+            'link' => $link,
+            'pengaturan' => $pengaturan
+
         ];
 
         return view('landingpage/page-gallery', $data);

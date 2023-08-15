@@ -77,6 +77,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/link" class="nav-link">
+                    <i class="fas fa-link mr-2"></i>
+                        <p>
+                            Kelola Quick Link
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/settings" class="nav-link">
                         <i class="fas fa-cog mr-2"></i>
                         <p>
@@ -86,7 +94,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/logout" class="nav-link">
-                        <i class="fas fa-cog mr-2"></i>
+                    <i class="fas fa-sign-out-alt mr-2"></i>
                         <p>
                             Logout
                         </p>

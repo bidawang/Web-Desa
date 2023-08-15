@@ -5,26 +5,33 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\BeritaModel;
 use App\Models\PengaturanModel;
+use App\Models\LinkModel;
+
 
 class BeritaController extends BaseController
 {
     protected $beritaModel;
     protected $pengaturanModel;
+    protected $linkModel;
+
 
     public function __construct()
     {
         $this->beritaModel = new BeritaModel();
         $this->pengaturanModel = new PengaturanModel();
+        $this->linkModel = new LinkModel();
     }
 
     public function pageNews()
     {
         $berita = $this->beritaModel->findAll();
         $pengaturan = $this->pengaturanModel->first();
+        $link = $this->linkModel->getLink();
         $data = [
             'title' => 'Berita',
             'berita' => $berita,
-            'pengaturan' => $pengaturan
+            'pengaturan' => $pengaturan,
+            'link' => $link
         ];
 
         return view('landingpage/pagenews', $data);
@@ -57,9 +64,11 @@ class BeritaController extends BaseController
     public function index()
     {
         $berita = $this->beritaModel->findAll();
+        
         $data = [
             'title' => 'Berita',
-            'berita' => $berita
+            'berita' => $berita,
+            
         ];
 
         return view('berita/index', $data);
