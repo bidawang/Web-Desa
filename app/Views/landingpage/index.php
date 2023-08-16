@@ -14,7 +14,7 @@
                                 <div class="container">
                                     <div class="row justify-content-center">
                                         <div class="col-lg-7 text-center">
-                                            <p class="fs-4 text-white animated zoomIn">Selamat Datang di <strong class="text-dark text-bold" >Wesbsite</strong> Resmi</p>
+                                            <p class="fs-4 text-white animated zoomIn">Selamat Datang di <strong class="text-dark text-bold" >Website</strong> Resmi</p>
                                             <h1 class="display-1 text-dark mb-4 animated zoomIn">
                                             <?= $pengaturan['nama_desa']?>
                                             </h1>
