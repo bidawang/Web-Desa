@@ -132,98 +132,139 @@ class GalleryPhotoController extends BaseController
                 'errors' => [
                     'required' => 'Deskripsi harus diisi'
                 ]
-            ],
-        ];
-
-        if (!$this->validate($validationRules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-
-        }
-
-        $judulFoto = $this->request->getVar('judul_foto');
-        $data = [
-            'judul_foto' => $judulFoto,
-            'nama_foto' => $this->request->getFile('nama_foto')->getName(),
-            'deskripsi' => $this->request->getVar('deskripsi'),
-            'carousel' => 1,
-        ];
-
-        if ($this->fotoModel->insert($data)) {
-            //pindah ke 
-            $this->request->getFile('nama_foto')->move(ROOTPATH . 'public/uploads');
-            session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
-        } else {
-            session()->setFlashdata('errors', 'Data gagal ditambahkan');
-        }
-
-        return redirect()->to('/photo');
-    }
-
-    public function edit($id)
-    {
-        $gallery = $this->fotoModel->find($id);
-        if (!$gallery) {
-            return redirect()->to('/photo')->with('errors', 'Data tidak ditemukan');
-        }
-
-        $data = [
-            'title' => 'Edit Photo',
-            'validation' => \Config\Services::validation(),
-            'gallery' => $gallery
-        ];
-        return view('galleryphoto/edit', $data);
-    }
-
-    public function update($id)
-    {
-        $validationRules = [
-            'judul_foto' => [
-                'rules ' => 'required',
-                'errors' => [
-                    'required' => 'Judul Foto harus diisi',
-                ]
-            ],
-            'nama_foto' => [
-                'rules' => 'max_size[nama_foto,2048]|is_image[nama_foto]|mime_in[nama_foto,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto terlalu besar',
-                    'is_image' => 'File yang diupload bukan foto',
-                    'mime_in' => 'File yang diupload bukan foto'
-                ]
-            ],
-            'deskripsi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Deskripsi harus diisi'
-                ]
             ]
         ];
 
         if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+
         }
 
         $judulFoto = $this->request->getVar('judul_foto');
+        $uploadedFile = $this->request->getFile('nama_foto');
+
+        // Ukuran gambar yang diinginkan
+        $targetWidth = 1600;
+        $targetHeight = 1200;
+
+        // Buat gambar baru dengan ukuran yang diinginkan
+        $newImage = imagecreatetruecolor($targetWidth, $targetHeight);
+
+        // Ubah gambar asli menjadi gambar GD
+        $sourceImage = imagecreatefromstring(file_get_contents($uploadedFile->getTempName()));
+
+        // Interpolasi untuk peningkatan ukuran
+        imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $targetWidth, $targetHeight, imagesx($sourceImage), imagesy($sourceImage));
+
+        // Simpan gambar yang sudah diubah ukurannya
+        $imagePath = ROOTPATH . 'public/uploads/' . $uploadedFile->getName();
+        imagejpeg($newImage, $imagePath);
+
+        imagedestroy($sourceImage);
+        imagedestroy($newImage);
         $data = [
             'judul_foto' => $judulFoto,
+            'nama_foto' => $this->request->getFile('nama_foto')->getName(),
             'deskripsi' => $this->request->getVar('deskripsi')
         ];
 
-        $file = $this->request->getFile('nama_foto');
-
-        if ($file->isValid()) {
-            $newFileName = $file->getRandomName();
-            $file->move(ROOTPATH . 'public/uploads', $newFileName);
-            $data['nama_foto'] = $newFileName;
-        }
-
-        // Lakukan pembaruan data
-        if ($this->fotoModel->update($id, $data)) {
-            session()->setFlashdata('pesan', 'Data berhasil diperbarui');
+        if ($this->fotoModel->insert($data)) {
+            //pindah ke 
+            $this->request->getFile('nama_foto')->move(ROOTPATH . '../public_html/uploads');
+            session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
         } else {
-            session()->setFlashdata('errors', 'Data gagal diperbarui');
+            session()->setFlashdata('errors', 'Data gagal ditambahkan');
         }
 
+            return redirect()->to('/photo');
+        }
+
+        public function edit($id)
+        {
+            $gallery = $this->fotoModel->find($id);
+            if (!$gallery) {
+                return redirect()->to('/photo')->with('errors', 'Data tidak ditemukan');
+            }
+
+            $data = [
+                'title' => 'Edit Photo',
+                'validation' => \Config\Services::validation(),
+                'gallery' => $gallery
+            ];
+            return view('galleryphoto/edit', $data);
+        }
+
+        public function update($id)
+        {
+            $validationRules = [
+                'judul_foto' => [
+                    'rules ' => 'required',
+                    'errors' => [
+                        'required' => 'Judul Foto harus diisi',
+                    ]
+                ],
+                'nama_foto' => [
+                    'rules' => 'max_size[nama_foto,2048]|is_image[nama_foto]|mime_in[nama_foto,image/jpg,image/jpeg,image/png]',
+                    'errors' => [
+                        'max_size' => 'Ukuran foto terlalu besar',
+                        'is_image' => 'File yang diupload bukan foto',
+                        'mime_in' => 'File yang diupload bukan foto'
+                    ]
+                ],
+                'deskripsi' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Deskripsi harus diisi'
+                    ]
+                ]
+            ];
+    
+            if (!$this->validate($validationRules)) {
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            }
+    
+            $judulFoto = $this->request->getVar('judul_foto');
+            $uploadedFile = $this->request->getFile('nama_foto');
+    
+            // Jika gambar baru diunggah
+            if ($uploadedFile->isValid() && !$uploadedFile->hasMoved()) {
+                // Ukuran gambar yang diinginkan
+                $targetWidth = 1600;
+                $targetHeight = 1200;
+    
+                // Buat gambar baru dengan ukuran yang diinginkan
+                $newImage = imagecreatetruecolor($targetWidth, $targetHeight);
+    
+                // Ubah gambar asli menjadi gambar GD
+                $sourceImage = imagecreatefromstring(file_get_contents($uploadedFile->getTempName()));
+    
+                // Interpolasi untuk peningkatan ukuran
+                imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $targetWidth, $targetHeight, imagesx($sourceImage), imagesy($sourceImage));
+    
+                // Simpan gambar yang sudah diubah ukurannya
+                $imagePath = ROOTPATH . '../public_html/uploads/' . $uploadedFile->getName();
+                imagejpeg($newImage, $imagePath);
+    
+                imagedestroy($sourceImage);
+                imagedestroy($newImage);
+            }
+    
+            // Update data dalam basis data
+            $data = [
+                'judul_foto' => $judulFoto,
+                'deskripsi' => $this->request->getVar('deskripsi')
+            ];
+    
+            if ($uploadedFile->isValid() && !$uploadedFile->hasMoved()) {
+                $data['nama_foto'] = $uploadedFile->getName();
+            }
+    
+            // Lakukan pembaruan data
+            if ($this->fotoModel->update($id, $data)) {
+                session()->setFlashdata('pesan', 'Data berhasil diperbarui');
+            } else {
+                session()->setFlashdata('errors', 'Data gagal diperbarui');
+            }
         return redirect()->to('/photo');
     }
 

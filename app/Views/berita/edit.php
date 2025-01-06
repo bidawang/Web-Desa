@@ -38,7 +38,7 @@
                                     <!-- Input fields for editing -->
                                     <div class="form-group">
                                         <label for="judul_berita">Judul Berita</label>
-                                        <input type="text" class="form-control <?= (session('errors.judul_berita')) ? 'is-invalid' : ''; ?>" id="judul_berita" name="judul_berita" value="<?= $berita['judul_berita']; ?>">
+                                        <input type="text" class="form-control <?= (session('errors.judul_berita')) ? 'is-invalid' : ''; ?>" id="judul_berita" name="judul_berita" value="<?= old('judul_berita', $berita['judul_berita']); ?>" placeholder="Masukkan Judul Berita">
                                         <?php if (session('errors.judul_berita')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= session('errors.judul_berita'); ?>
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="isi">Isi Berita</label>
-                                        <textarea class="form-control <?= (session('errors.isi')) ? 'is-invalid' : ''; ?>" id="isi" name="isi"><?= $berita['isi']; ?></textarea>
+                                        <textarea class="form-control <?= (session('errors.isi')) ? 'is-invalid' : ''; ?>" id="isi" name="isi" rows="5" placeholder="Masukkan Isi Berita"><?= old('isi', $berita['isi']); ?></textarea>
                                         <?php if (session('errors.isi')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= session('errors.isi'); ?>
@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="kategori_berita">Kategori Berita</label>
-                                        <input type="text" class="form-control <?= (session('errors.kategori_berita')) ? 'is-invalid' : ''; ?>" id="kategori_berita" name="kategori_berita" value="<?= $berita['kategori_berita']; ?>">
+                                        <input type="text" class="form-control <?= (session('errors.kategori_berita')) ? 'is-invalid' : ''; ?>" id="kategori_berita" name="kategori_berita" value="<?= old('kategori_berita', $berita['kategori_berita']); ?>" placeholder="Masukkan Kategori Berita">
                                         <?php if (session('errors.kategori_berita')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= session('errors.kategori_berita'); ?>
@@ -73,8 +73,9 @@
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
+                                        <label>Preview Foto</label>
                                         <div class="col-md-12 mt-3">
-                                            <img id="image-preview" src="<?= base_url('uploads/' . $berita['foto']); ?>" alt="Selected Image" width="100" class="rounded-circle">
+                                            <img id="image-preview" src="<?= base_url('uploads/' . $berita['foto']); ?>" alt="Selected Image" width="150" class="img-thumbnail">
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +83,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Update</button>
-                                    <a href="/news" class="btn btn-secondary">Back</a>
+                                    <a href="/news" class="btn btn-secondary">Kembali</a>
                                 </div>
                             </form>
                         </div>
@@ -91,7 +92,6 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-
             </div>
             <!-- /.col -->
         </div>

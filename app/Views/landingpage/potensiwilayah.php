@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-6">
                         <h1>Foto</h1>
-                        <img src="<?= base_url('uploads/potensi-wilayah.jpg'); ?>" class="img-fluid" alt="Potensi Wilayah">
+                        <img src="<?= base_url('uploads/' . $pengaturan['img_potensi_wilayah']); ?>" class="img-fluid" alt="Potensi Wilayah">
                     </div>
                 </div>
             </div>

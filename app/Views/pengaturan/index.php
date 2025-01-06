@@ -45,7 +45,7 @@
                                 </div>
                             <?php endif; ?>
                             <!-- form start -->
-                            <form action="settings/update" method="post">
+                            <form action="settings/update" method="post" enctype="multipart/form-data">
                                 <?= csrf_field(); ?>
                                 <div class="card-body">
                                     <!-- Input fields for editing -->
@@ -139,32 +139,73 @@
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <!-- struktur type image -->
+
                                     <div class="form-group">
-                                        <label for="struktur">Struktur</label>
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                                <img src="public/uploads/<?= $pengaturan['struktur']; ?>" class="img-thumbnail img-preview">
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input <?= (session('errors.struktur')) ? 'is-invalid' : ''; ?>" id="struktur" name="struktur" onchange="previewImg()">
-                                                    <label class="custom-file-label" for="struktur"><?= $pengaturan['struktur']; ?></label>
-                                                    <?php if (session('errors.struktur')) : ?>
-                                                        <div class="invalid-feedback">
-                                                            <?= session('errors.struktur'); ?>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
+                                        <label for="logo_desa">Logo Desa</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input <?= (session('errors.logo_desa')) ? 'is-invalid' : ''; ?>" id="logo_desa" name="logo_desa" onchange="previewImage('logo_desa', 'image-preview-logo_desa');">
+                                                <label class="custom-file-label" for="logo_desa">Pilih Foto</label>
+                                                <?php if (session('errors.logo_desa')) : ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session('errors.logo_desa'); ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
-                                </div>
-                                <!-- /.card-body -->
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 mt-3">
+                                            <img id="image-preview-logo_desa" src="<?= base_url('uploads/' . $pengaturan['logo_desa']); ?>" alt="Selected Image" width="100">
+                                        </div>
+                                    </div>
 
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                    <a href="/" class="btn btn-secondary">Back</a>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="struktur_organisasi">Struktur Organisasi</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input <?= (session('errors.struktur_organisasi')) ? 'is-invalid' : ''; ?>" id="struktur_organisasi" name="struktur_organisasi" onchange="previewImage('struktur_organisasi', 'image-preview-struktur_organisasi');">
+                                                <label class="custom-file-label" for="struktur_organisasi">Pilih Foto</label>
+                                                <?php if (session('errors.struktur_organisasi')) : ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session('errors.struktur_organisasi'); ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 mt-3">
+                                            <img id="image-preview-struktur_organisasi" src="<?= base_url('uploads/' . $pengaturan['struktur_organisasi']); ?>" alt="Selected Image" width="100">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="img_potensi_wilayah">Gambar Potensi Wilayah</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input <?= (session('errors.img_potensi_wilayah')) ? 'is-invalid' : ''; ?>" id="img_potensi_wilayah" name="img_potensi_wilayah" onchange="previewImage('img_potensi_wilayah', 'image-preview-img_potensi_wilayah');">
+                                                <label class="custom-file-label" for="img_potensi_wilayah">Pilih Foto</label>
+                                                <?php if (session('errors.img_potensi_wilayah')) : ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session('errors.img_potensi_wilayah'); ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 mt-3">
+                                            <img id="image-preview-img_potensi_wilayah" src="<?= base_url('uploads/' . $pengaturan['img_potensi_wilayah']); ?>" alt="Selected Image" width="100">
+                                        </div>
+                                    </div>
+
+
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="/" class="btn btn-secondary">Back</a>
+                                    </div>
                             </form>
                         </div>
                         <!-- /.card-body -->

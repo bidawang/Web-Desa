@@ -26,6 +26,20 @@
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>plugins/summernote/summernote-bs4.min.css">
+    <link href=" <?= base_url('vendor/'); ?>select2.min.css" rel="stylesheet" />
+    <!-- jQuery -->
+    <script src="<?= base_url('assets/'); ?>plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?= base_url('assets/'); ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- JQVMap -->
+<script src="<?= base_url('assets/'); ?>plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="<?= base_url('assets/'); ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="<?= base_url('assets/'); ?>plugins/jquery-knob/jquery.knob.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<script src="<?= base_url('vendor/select2.min.js'); ?>"></script>
 
 </head>
 
@@ -38,24 +52,24 @@
 
         <!-- Main Sidebar Container -->
         <?= $this->include('templates/sidebar'); ?>
-
+        
         <!-- Content Wrapper. Contains page content -->
         <?= $this->renderSection('content'); ?>
         <!-- /.content-wrapper -->
-
+        
         <?= $this->include('templates/footer'); ?>
-
+        
     </div>
     <!-- ./wrapper -->
+    
+    
+    
+    
 
 
-    <!-- jQuery -->
-    <script src="<?= base_url('assets/'); ?>plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="<?= base_url('assets/'); ?>plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
+
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="<?= base_url('assets/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -63,11 +77,7 @@
     <script src="<?= base_url('assets/'); ?>plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="<?= base_url('assets/'); ?>plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="<?= base_url('assets/'); ?>plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="<?= base_url('assets/'); ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="<?= base_url('assets/'); ?>plugins/jquery-knob/jquery.knob.min.js"></script>
+    
     <!-- daterangepicker -->
     <script src="<?= base_url('assets/'); ?>plugins/moment/moment.min.js"></script>
     <script src="<?= base_url('assets/'); ?>plugins/daterangepicker/daterangepicker.js"></script>
@@ -83,29 +93,45 @@
     <!-- <script src="<?= base_url('assets/'); ?>dist/js/demo.js"></script> -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?= base_url('assets/'); ?>dist/js/pages/dashboard.js"></script>
-
+    
+    
+    
+    
     <script>
         $(document).ready(function() {
-            $('#isi, #sejarah_desa, #kalimat_ucapan, #visi, #misi').summernote();
+            $('#isi, #sejarah_desa, #kalimat_ucapan, #visi, #misi, #deskripsi').summernote();
         });
-    </script>
+        </script>
     <script>
-        function updateImagePreview(event) {
-            const input = event.target;
+        function previewImage(inputId, imagePreviewId) {
+            const input = document.getElementById(inputId);
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-
+                
                 reader.onload = function(e) {
-                    const imagePreview = document.getElementById('image-preview');
+                    const imagePreview = document.getElementById(imagePreviewId);
                     imagePreview.src = e.target.result;
                 };
-
+                
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        const imageInput = document.getElementById('foto');
-        imageInput.addEventListener('change', updateImagePreview);
-    </script>
+        
+        const logoDesaInput = document.getElementById('logo_desa');
+        logoDesaInput.addEventListener('change', function() {
+            previewImage('logo_desa', 'image-preview-logo_desa');
+        });
+
+        const strukturOrganisasiInput = document.getElementById('struktur_organisasi');
+        strukturOrganisasiInput.addEventListener('change', function() {
+            previewImage('struktur_organisasi', 'image-preview-struktur_organisasi');
+        });
+        
+        const imgPotensiWilayahInput = document.getElementById('img_potensi_wilayah');
+        imgPotensiWilayahInput.addEventListener('change', function() {
+            previewImage('img_potensi_wilayah', 'image-preview-img_potensi_wilayah');
+        });
+        </script>
 </body>
 
 </html>

@@ -17,7 +17,6 @@ class PengaturanController extends BaseController
     public function index()
     {
         $pengaturan = $this->pengaturanModel->first();
-        // dd($pengaturan);
         $data = [
             'title' => 'Data Desa',
             'validation' => \Config\Services::validation(),
@@ -30,80 +29,39 @@ class PengaturanController extends BaseController
     public function update()
     {
         $validationRules = [
-            'nama_desa' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nama Desa harus diisi.'
-                ]
-            ],
-            'sejarah_desa' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Sejarah Desa harus diisi.'
-                ]
-            ],
-            'kalimat_ucapan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Kalimat Ucapan harus diisi.'
-                ]
-            ],
-            'visi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Visi harus diisi.'
-                ]
-            ],
-            'misi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Misi harus diisi.'
-                ]
-            ],
-            'titik_koordinator' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Titik Koordinat harus diisi.'
-                ]
-            ],
-            'jumlah_rt' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Jumlah RT harus diisi.',
-                    'numeric' => 'Jumlah RT harus berbentuk angka!.'
-                ]
-            ],
-            'jumlah_penduduk' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Jumlah Penduduk harus diisi.',
-                    'numeric' => 'Jumlah Penduduk harus berbentuk angka!.'
-                ]
-            ],
-            'hari' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Hari harus diisi.',
-                ]
-            ],
-            'waktu_bisnis' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Waktu Bisnis Penduduk harus diisi.',
-                ]
-            ],
-
-            'struktur' => [
-                'rules' => 'max_size[struktur,1024]|is_image[struktur]|mime_in[struktur,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar terlalu besar.',
-                    'is_image' => 'File yang anda pilih bukan gambar.',
-                    'mime_in' => 'File yang anda pilih bukan gambar.'
-                ]
-            ]
+            'nama_desa' => 'required',
+            'sejarah_desa' => 'required',
+            'kalimat_ucapan' => 'required',
+            'visi' => 'required',
+            'misi' => 'required',
+            'titik_koordinator' => 'required',
+            'jumlah_rt' => 'required|numeric',
+            'jumlah_penduduk' => 'required|numeric',
+            'hari' => 'required',
+            'waktu_bisnis' => 'required',
         ];
 
-        if (!$this->validate($validationRules)) {
+        $validationMessages = [
+            'required' => 'Field :field harus diisi.',
+            'numeric' => 'Field :field harus berbentuk angka.',
+        ];
+
+        // Validasi input foto logo_desa
+        if ($this->request->getFile('logo_desa')) {
+            $validationRules['logo_desa'] = 'uploaded[logo_desa]|max_size[logo_desa,2048]|ext_in[logo_desa,png,jpg,jpeg]|is_image[logo_desa,image/jpeg,image/png]';
+        }
+
+        // Validasi input foto struktur_organisasi
+        if ($this->request->getFile('struktur_organisasi')) {
+            $validationRules['struktur_organisasi'] = 'uploaded[struktur_organisasi]|max_size[struktur_organisasi,2048]|ext_in[struktur_organisasi,png,jpg,jpeg]|is_image[struktur_organisasi,image/jpeg,image/png]';
+        }
+
+        // Validasi input foto img_potensi_wilayah
+        if ($this->request->getFile('img_potensi_wilayah')) {
+            $validationRules['img_potensi_wilayah'] = 'uploaded[img_potensi_wilayah]|max_size[img_potensi_wilayah,2048]|ext_in[img_potensi_wilayah,png,jpg,jpeg]|is_image[img_potensi_wilayah,image/jpeg,image/png]';
+        }
+
+        if (!$this->validate($validationRules, $validationMessages)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
@@ -118,8 +76,70 @@ class PengaturanController extends BaseController
             'jumlah_penduduk' => $this->request->getVar('jumlah_penduduk'),
             'hari' => $this->request->getVar('hari'),
             'waktu_bisnis' => $this->request->getVar('waktu_bisnis'),
-            'struktur' => $this->request->getFile('struktur')->getName() ?? '' // jika tidak ada file yang diupload, maka akan dikosongkan
         ];
+
+        // Upload dan simpan logo_desa jika di-upload
+        if ($logoDesaFile = $this->request->getFile('logo_desa')) {
+            if ($logoDesaFile->isValid()) {
+                $newLogoName = $logoDesaFile->getRandomName();
+                $logoDesaFile->move(ROOTPATH . '../public_html/uploads', $newLogoName);
+
+                // Hapus data logo_desa yang sudah ada sebelumnya
+                $existingData = $this->pengaturanModel->find(1);
+                $existingLogoPath = ROOTPATH . 'public_html/uploads/' . $existingData['logo_desa'];
+                if (file_exists($existingLogoPath)) {
+                    unlink($existingLogoPath);
+                }
+
+                $data['logo_desa'] = $newLogoName;
+            }
+        }
+
+        // Handle struktur_organisasi
+        if ($strukturOrganisasiFile = $this->request->getFile('struktur_organisasi')) {
+            if ($strukturOrganisasiFile->isValid()) {
+                $newStrukturName = $strukturOrganisasiFile->getRandomName();
+                $strukturOrganisasiFile->move(ROOTPATH . '../public_html/uploads', $newStrukturName);
+
+                // Resize the image to the desired dimensions (1361x595)
+                $image = \Config\Services::image()
+                    ->withFile(ROOTPATH . '../public_html/uploads/' . $newStrukturName)
+                    ->resize(1361, 595, false)
+                    ->save(ROOTPATH . '../public_html/uploads/' . $newStrukturName);
+
+                // Delete the old struktur_organisasi file if it exists
+                $existingData = $this->pengaturanModel->find(1);
+                $existingStrukturPath = ROOTPATH . 'public_html/uploads/' . $existingData['struktur_organisasi'];
+                if (file_exists($existingStrukturPath)) {
+                    unlink($existingStrukturPath);
+                }
+
+                $data['struktur_organisasi'] = $newStrukturName;
+            }
+        }
+
+        // Handle img_potensi_wilayah
+        if ($imgPotensiWilayahFile = $this->request->getFile('img_potensi_wilayah')) {
+            if ($imgPotensiWilayahFile->isValid()) {
+                $newImgPotensiName = $imgPotensiWilayahFile->getRandomName();
+                $imgPotensiWilayahFile->move(ROOTPATH . '../public_html/uploads', $newImgPotensiName);
+
+                // Resize the image to the desired dimensions (1022x630)
+                $image = \Config\Services::image()
+                    ->withFile(ROOTPATH . '../public_html/uploads/' . $newImgPotensiName)
+                    ->resize(1022, 630, false)
+                    ->save(ROOTPATH . '../public_html/uploads/' . $newImgPotensiName);
+
+                // Delete the old img_potensi_wilayah file if it exists
+                $existingData = $this->pengaturanModel->find(1);
+                $existingImgPotensiPath = ROOTPATH . 'public_html/uploads/' . $existingData['img_potensi_wilayah'];
+                if (file_exists($existingImgPotensiPath)) {
+                    unlink($existingImgPotensiPath);
+                }
+
+                $data['img_potensi_wilayah'] = $newImgPotensiName;
+            }
+        }
 
         if ($this->pengaturanModel->update(1, $data)) {
             return redirect()->to('/settings')->with('success', 'Data berhasil diperbarui!');

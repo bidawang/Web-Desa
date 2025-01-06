@@ -36,8 +36,8 @@
                                 <?= csrf_field(); ?>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="deskripsi">Deskripsi</label>
-                                        <input type="text" class="form-control <?= (session('errors.nama')) ? 'is-invalid' : ''; ?>" id="deskripsi" name="deskripsi" placeholder="Tambahkan deskripsi" value="<?= $kontak['deskripsi']; ?>">
+                                        <label for="deskripsi_kontak">Deskripsi</label>
+                                        <input type="text" class="form-control <?= (session('errors.deskripsi_kontak')) ? 'is-invalid' : ''; ?>" id="deskripsi_kontak" name="deskripsi_kontak" placeholder="Tambahkan deskripsi" value="<?= $kontak['deskripsi_kontak']; ?>">
                                         <?php if (session('errors.deskripsi')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= session('errors.deskripsi'); ?>

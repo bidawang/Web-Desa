@@ -35,16 +35,17 @@
                             <form action="/kontak/save" method="post">
                                 <?= csrf_field(); ?>
                                 <div class="card-body">
+                                    <!-- deskripsi_kontak -->
                                     <div class="form-group">
-                                        <!-- deskripsi -->
-                                        <label for="deskripsi">Deskripsi</label>
-                                        <input type="text" class="form-control <?= (session('errors.deskripsi')) ? 'is-invalid' : ''; ?>" id="deskripsi" name="deskripsi" placeholder="Tambahkan Deskripsi" value="<?= old('deskripsi'); ?>">
-                                        <?php if (session('errors.deskripsi')) : ?>
+                                        <label for="deskripsi_kontak">Deskripsi Kontak</label>
+                                        <input type="text" class="form-control <?= (session('errors.deskripsi')) ? 'is-invalid' : ''; ?>" id="deskripsi_kontak" name="deskripsi_kontak" placeholder="Tambahkan Deskripsi" value="<?= old('deskripsi_kontak'); ?>">
+                                        <?php if (session('errors.deskripsi_kontak')) : ?>
                                             <div class="invalid-feedback">
-                                                <?= session('errors.deskripsi'); ?>
+                                                <?= session('errors.deskripsi_kontak'); ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
+                                        
                                     <!-- email -->
                                     <div class="form-group">
                                         <label for="email">Email</label>

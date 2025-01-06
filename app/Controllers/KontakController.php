@@ -28,7 +28,6 @@ class KontakController extends BaseController
             'title' => 'Kontak',
             'kontak' => $kontak,
         ];
-
         return view('kontak/index', $data);
     }
 
@@ -62,7 +61,7 @@ class KontakController extends BaseController
     public function save()
     {
         $validationRules = [
-            'deskripsi' => 'required',
+            'deskripsi_kontak' => 'required',
             'email' => 'required|valid_email',
             'no_telp' => 'required|numeric',
             'alamat' => 'required'
@@ -73,7 +72,7 @@ class KontakController extends BaseController
         }
 
         $data = [
-            'deskripsi' => $this->request->getPost('deskripsi'),
+            'deskripsi_kontak' => $this->request->getPost('deskripsi_kontak'),
             'email' => $this->request->getPost('email'),
             'no_telp' => $this->request->getPost('no_telp'),
             'alamat' => $this->request->getPost('alamat')
@@ -105,7 +104,7 @@ class KontakController extends BaseController
     public function update($id)
     {
         $validationRules = [
-            'deskripsi' => 'required',
+            'deskripsi_kontak' => 'required',
             'email' => 'required|valid_email',
             'no_telp' => 'required|numeric',
             'alamat' => 'required'
@@ -115,13 +114,13 @@ class KontakController extends BaseController
             return redirect()->to('/kontak/edit/' . $id)->withInput();
         }
 
-        $deskripsi = $this->request->getVar('deskripsi');
-        $email = $this->request->getVar('email');
-        $no_telp = $this->request->getVar('no_telp');
-        $alamat = $this->request->getVar('alamat');
+       $deskripsi_kontak = $this->request->getPost('deskripsi_kontak');
+        $email = $this->request->getPost('email');
+        $no_telp = $this->request->getPost('no_telp');
+        $alamat = $this->request->getPost('alamat');
 
        $data = [
-           'deskripsi' => $deskripsi,
+           'deskripsi_kontak' => $deskripsi_kontak,
            'email' => $email,
            'no_telp' => $no_telp,
            'alamat' => $alamat

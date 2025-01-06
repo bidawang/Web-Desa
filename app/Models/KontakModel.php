@@ -8,6 +8,6 @@ class KontakModel extends Model
 {
     protected $table           = 'tb_kontak';
     protected $useTimestamps = true;
-    protected $allowedFields = ['deskripsi', 'email', 'no_telp', 'alamat'];
+    protected $allowedFields = ['deskripsi_kontak', 'email', 'no_telp', 'alamat'];
  
 }

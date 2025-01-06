@@ -2,8 +2,8 @@
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-lg-3 col-md-6">
-                <h4 class="text-primary mb-4">Our Office</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i><?= $kontak['deskripsi']; ?></p>
+                <h4 class="text-primary mb-4">Kantor Desa</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i><?= $kontak['alamat']; ?></p>
                 <p class="mb-2"><i class="fa fa-phone-alt text-primary me-3"></i><?= $kontak['no_telp']; ?></p>
                 <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i><?= $kontak['email']; ?></p>
                 <div class="d-flex pt-3">
@@ -14,20 +14,22 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h4 class="text-primary mb-4">Quick Links</h4>
+                <h4 class="text-primary mb-4">Tautan Terkait</h4>
                 <?php foreach ($link as $row) : ?>
                     <a target="_blank" class="btn btn-link" href="<?= $row['link']; ?>"><?= $row['nama']; ?></a>
                 <?php endforeach; ?>
 
             </div>
             <div class="col-lg-3 col-md-6">
-                <h4 class="text-primary mb-4">Business Hours</h4>
+                <h4 class="text-primary mb-4">Jam Kerja</h4>
                 <p class="mb-1"><?= $pengaturan['hari']; ?></p>
                 <h6 class="text-light"><?= $pengaturan['waktu_bisnis']; ?></h6>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h4 class="text-primary mb-4">Newsletter</h4>
-                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                <h4 class="text-primary mb-4">Pemberitahuan</h4>
+                <p>
+                    <?= $kontak['deskripsi_kontak'] ?>
+                </p>
             </div>
         </div>
     </div>

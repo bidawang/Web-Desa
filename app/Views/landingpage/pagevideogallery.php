@@ -13,7 +13,7 @@
             <?php foreach ($video as $row) : ?>
                 <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="store-item position-relative text-center">
-                        <iframe width="360" height="300" src="<?= $row['link']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe width="100%" height="250px" src="<?= $row['link']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         <div class="p-4">
                             <h4 class="mb-3"><?= $row['judul_video']; ?></h4>
                             <!-- <p>Untuk Deskripsi</p> -->

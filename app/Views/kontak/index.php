@@ -42,7 +42,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>deskripsi</th>
+                                        <th>deskripsi Kontak</th>
                                         <th>email</th>
                                         <th>no_telp</th>
                                         <th>Alamat</th>
@@ -56,7 +56,7 @@
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td><?= $row['deskripsi']; ?></td>
+                                            <td><?= $row['deskripsi_kontak']; ?></td>
                                             <td><?= $row['email']; ?></td>
                                             <td><?= $row['no_telp']; ?></td>
                                             <td><?= $row['alamat']; ?></td>
@@ -70,7 +70,7 @@
                                 <tfoot>
                                     <tr>
                                     <th>No</th>
-                                        <th>deskripsi</th>
+                                        <th>deskripsi_kontak</th>
                                         <th>email</th>
                                         <th>no_telp</th>
                                         <th>Alamat</th>

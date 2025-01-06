@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Quick Link</h1>
+                    <h1 class="m-0">Tautan Cepat</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -33,7 +33,7 @@
                                     <?= session('pesan'); ?>
                                 </div>
                             <?php endif; ?>
-                            <h3 class="card-title">Data Quick Link</h3><br>
+                            <h3 class="card-title">Data Tautan Cepat</h3><br>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

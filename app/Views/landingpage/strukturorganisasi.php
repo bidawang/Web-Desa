@@ -8,13 +8,12 @@
         <div class="row g-5">
             <div class="col-lg-12 wow fadeIn" data-wow-delay="0.5s">
                 <div class="section-title-vh" style="text-align: center;">
-                    <p class="fs-5 fw-medium fst-italic text-primary" style="margin-bottom: -1px;">Potensi Wilayah</p>
+                    <p class="fs-5 fw-medium fst-italic text-primary" style="margin-bottom: -1px;">Struktur Organisasi</p>
                     <h1 class="display-6"> <?= $pengaturan['nama_desa']; ?></h1>
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-12">
-                        <h1>Foto</h1>
-                        <img src="<?= base_url('uploads/potensi-wilayah.jpg'); ?>?>" class="img-fluid" alt="Potensi Wilayah">
+                        <img src="<?= base_url('uploads/' . $pengaturan['struktur_organisasi']); ?>" class="img-fluid" alt="Potensi Wilayah">
                     </div>
                 </div>
             </div>

@@ -8,7 +8,8 @@
     <div class="container">
         <div class="row g-5">
             <div class="back-page-news">
-                <a href="/page-news" class="btn btn-primary rounded-pill py-3 px-5">Kembali</a>
+                <a href="javascript:history.back()" class="btn btn-primary rounded-pill py-3 px-5">Kembali</a>
+
             </div>
             <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
                 <img class="img-fluid" src="<?= base_url('uploads/' . $berita['foto']); ?>" alt="">

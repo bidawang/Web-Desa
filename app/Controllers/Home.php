@@ -8,6 +8,8 @@ use App\Models\LinkModel;
 use App\Models\PengaturanModel;
 use App\Models\VideoModel;
 use App\Models\KontakModel;
+use App\Models\PelayananModel;
+use App\Models\ProdukModel;
 
 class Home extends BaseController
 {
@@ -17,6 +19,9 @@ class Home extends BaseController
     protected $pengaturanModel;
     protected $linkModel;
     protected $kontakModel;
+    protected $produkModel;
+
+    protected $pelayananModel;
 
     public function __construct()
     {
@@ -26,6 +31,8 @@ class Home extends BaseController
         $this->pengaturanModel = new PengaturanModel();
         $this->linkModel = new LinkModel();
         $this->kontakModel = new KontakModel();
+        $this->produkModel = new ProdukModel();
+        $this->pelayananModel = new PelayananModel();
     }
 
     public function index(): string
@@ -37,17 +44,21 @@ class Home extends BaseController
         $pengaturan = $this->pengaturanModel->first();
         $link = $this->linkModel->getLink();
         $kontak = $this->kontakModel->first();
+        $produk = $this->produkModel->findAll();
+        $pelayanan = $this->pelayananModel->findAll();
         // dd($kontak[0]['deskripsi']);
 
 
         $data = [
-            'title' => 'Desa',
+            'title' => 'Pemerintah Desa Bentok Darat',
             'gallery' => $gallery,
             'berita' => $berita,
             'video' => $video,
             'pengaturan' => $pengaturan,
             'link' => $link,
-            'kontak' => $kontak
+            'kontak' => $kontak,
+            'produk' => $produk,
+            'pelayanan' => $pelayanan
         ];
         return view('landingpage/index', $data);
     }
