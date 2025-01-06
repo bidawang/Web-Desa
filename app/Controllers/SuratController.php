@@ -98,6 +98,26 @@ class SuratController extends BaseController
     if($id == 1){
         return view('landingpage/surat/domisili', $data);
     } elseif ($id == 2) {
+
+    $session = session(); // Ambil instance session
+    $iduser = $session->get('nik_pengaju');
+        // Ambil data anggota KK berdasarkan NIK pengaju
+        $anggotaKK = $this->anggotaKK->where('nik', $iduser)->first();
+        $kk = $this->KkModel->where('id_kk', $anggotaKK['id_kk'])->first();
+        // Validasi hubungan keluarga "Kepala Keluarga" dan "Istri" dalam KK
+        $kepalaKeluarga = $this->anggotaKK->where('id_kk', $kk['id_kk'])
+        ->where('hubungan_keluarga', 'Kepala Keluarga')
+        ->first();
+        $istri = $this->anggotaKK->where('id_kk', $kk['id_kk'])
+        ->where('hubungan_keluarga', 'Istri')
+        ->first();
+        
+    // Jika salah satu tidak ditemukan, kembalikan error
+    if (!$kepalaKeluarga || !$istri) {
+        return redirect()->to('pelayanan-masyarakat')->with('error', 'Data Kepala Keluarga dan Istri belum lengkap dalam Kartu Keluarga.');
+    }
+
+
         return view('landingpage/surat/kelahiran', $data);
     } elseif ($id == 3) {
         return view('landingpage/surat/kematian', $data);
@@ -644,7 +664,7 @@ public function print_sk_kelahiran($id){
         'umurPelapor' => $umurPelapor
     ];
 
-    dd($data);
+
     return view('pelayanan/surat/skkelahiran', $data);
 }
 
