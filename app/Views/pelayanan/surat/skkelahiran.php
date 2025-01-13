@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Keterangan Domisili</title>
+    <title>Surat Keterangan Kelahiran</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -18,68 +18,83 @@
         }
         .card {
             background: #ffffff;
-            width: 210mm;
-            height: auto;
-            max-width: 100%;
-            padding: 20mm;
+            width: 100%;
+            max-width: 210mm;
+            padding: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin: 10px;
         }
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        .header img {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 40px;
         }
         .header h1 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: #333;
             margin-bottom: 5px;
             text-transform: uppercase;
         }
         .header p {
-            font-size: 14px;
+            font-size: 12px;
             margin: 0;
             color: #555;
         }
         .content {
-            margin-top: 20px;
-            font-size: 14px;
+            margin-top: 10px;
+            font-size: 12px;
         }
         .content table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .content td {
-            padding: 5px 10px;
+            padding-left: 4px;
             vertical-align: top;
-            border-bottom: 1px solid #ddd;
         }
         .content td:first-child {
-            width: 25%;
+            width: 30%;
             font-weight: bold;
         }
         .content td:last-child {
-            width: 75%;
+            width: 70%;
         }
         .content p {
-            margin: 8px 0;
+            margin: 5px 0;
         }
+
+        /* Signature styling */
         .signature {
-            margin-top: 40px;
-            text-align: right;
-            font-size: 14px;
-        }
-        .signature p {
-            margin: 10px 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .footer button {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Menjaga konten tetap di bagian bawah */
+    align-items: end; /* Menyusun teks secara horisontal di tengah */
+    text-align: end; /* Mengatur agar teks terpusat */
+    margin-top: 50px;
+}
+
+.signature-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Mengatur teks supaya berada di sebelah kanan */
+}
+
+.signature p {
+    margin: 5px 0;
+}
+.footer button {
             background-color: #4CAF50;
             color: white;
             padding: 12px 24px;
@@ -96,61 +111,54 @@
         .footer button:hover {
             background-color: #45a049;
         }
-        .footer .back-btn {
-            background-color: #f44336;
-        }
-        @media screen and (max-width: 768px) {
-            body {
-                font-size: 10px;
-            }
-            .card {
-                width: 90%;
-                padding: 15mm;
-                font-size: 12px;
-            }
-            .header h1 {
-                font-size: 16px;
-            }
-            .footer button {
-                font-size: 14px;
-                padding: 10px 20px;
-                width: 100%;
-            }
-            .content table {
-                font-size: 12px;
-            }
-            .content td {
-                padding: 5px 8px;
-            }
-        }
+        
+
         @media print {
             body {
-                margin: 0;
-                padding: 0;
                 background: none;
-                box-shadow: none;
+                margin: 0;
             }
             .card {
                 width: 100%;
-                height: auto;
-                padding: 10mm;
+                padding: 10px;
                 box-shadow: none;
                 border-radius: 0;
+                page-break-inside: avoid;
             }
-            .no-print {
+            .footer {
                 display: none;
+            }
+            
+        }
+
+        @media screen and (max-width: 768px) {
+            .header img {
+                width: 20px;
+                left: 2px;
+                top: 2px;
+                font-size: 7px;
+            }
+            .header h1 {
+                font-size: 8px;
+            }
+            h2{
+                font-size: 7px
+            }
+            h3{
+                font-size: 6px
+            }
+            .header p {
+                font-size: 5px;
+            }
+            .content {
+                font-size: 5px;
+            }
+            .signature {
+                font-size: 5px;
             }
         }
     </style>
     <script>
-        window.onload = function() {
-            window.print();
-        };
-
-        window.onafterprint = function() {
-            history.back();
-        };
-
         function printDocument() {
             window.print();
         }
@@ -159,7 +167,10 @@
 <body>
     <div class="card">
         <div class="header">
-            <img src="<?= base_url('public/fotokop.png'); ?>" alt="Kop Surat">
+            <img src="<?= base_url('Logo Tanah Laut.png'); ?>" alt="Kop Surat">
+            <h1>PEMERINTAH DESA <?= $alamat['kelurahan']; ?></h1>
+            <p>Kecamatan <?= $alamat['kecamatan']; ?>, Kabupaten <?= $alamat['kota']; ?></p>
+            <p>Provinsi <?= $alamat['provinsi']; ?></p>
         </div>
         <center>
             <h2 style="margin-bottom: -10px; margin-top: 10px;">SURAT KETERANGAN KELAHIRAN</h2>
@@ -201,24 +212,27 @@
                 <tr><td>NIK</td><td>:</td><td><?= $anggotaKK['nik']; ?></td></tr>
                 <tr><td>Umur</td><td>:</td><td><?= $umurPelapor; ?></td></tr>
                 <tr><td>Pekerjaan</td><td>:</td><td><?= $anggotaKK['pekerjaan']; ?></td></tr>
-                <tr><td>Alamat</td><td>:</td><td><?= $alamat['alamat_lengkap']; ?>, <?= $alamat['kelurahan']; ?>, <?= $alamat['kota']; ?> Provinsi <?= $alamat['provinsi']; ?></td></tr>
+                <tr><td>Alamat</td><td>:</td><td><?= $alamat['alamat_lengkap']; ?><br><?= $alamat['kelurahan']; ?>, <?= $alamat['kota']; ?> Provinsi <?= $alamat['provinsi']; ?></td></tr>
                 <tr><td>Hubungan pelapor dengan bayi</td><td>:</td><td><?= $surat['hubungan_dengan_bayi']; ?></td></tr>
             </table>
             <p>Demikian surat keterangan ini dibuat dengan sebenarnya, untuk dipergunakan sebagaimana mestinya.</p>
         </div>
+
+
         <div class="signature">
-            <?php
-            $formatter = new \IntlDateFormatter('id_ID', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
-            $tanggal = $formatter->format(new \DateTime($surat['updated_at']));
-            ?>
-            <p><?= $alamat['kota']; ?>, <?= $tanggal; ?></p>
-            <br><br><br><br><br>
-            <p><?= $kades['nama_lengkap']; ?></p>
-            <p><?= $kades['nik']; ?></p>
-        </div>
+    <?php
+    $formatter = new \IntlDateFormatter('id_ID', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    $tanggal = $formatter->format(new \DateTime($surat['updated_at']));
+    ?>
+    <div class="signature-content">
+        <p style="margin-bottom: 100px;"><?= $alamat['kota']; ?>, <?= $tanggal; ?></p>
+        <p><?= $kades['nama_lengkap']; ?></p>
+        <p><?= $kades['nik']; ?></p>
     </div>
-    <div class="footer no-print">
-        <button onclick="window.history.back()" class="back-btn">Kembali</button>
+</div>
+    </div>
+
+    <div class="footer">
         <button onclick="printDocument()">Print Surat</button>
     </div>
 </body>

@@ -105,7 +105,7 @@
                 </div>
 
                 <!-- Back Button -->
-                <a href="javascript:history.back()" class="btn btn-primary rounded-pill py-3 px-5 mt-3">Kembali</a>
+                <a href="/pelayanan-masyarakat" class="btn btn-primary rounded-pill py-3 px-5 mt-3">Kembali</a>
             </div>
         </div>
     </div>

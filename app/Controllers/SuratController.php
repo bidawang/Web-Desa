@@ -586,6 +586,7 @@ public function print_sk_domisili($id)
         'surat' => $pelayanan, // Hanya data spesifik berdasarkan ID
         'anggotaKK' => $anggotaKK,
         'kk' => $kepala,
+        'kartu' => $kk,
         'kelahiran' => $kelahiran,
         'alamat' => $alamat,
         'kades' => $kades
