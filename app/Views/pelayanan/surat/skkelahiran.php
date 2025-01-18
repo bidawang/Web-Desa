@@ -232,8 +232,8 @@
 </div>
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
         <button onclick="printDocument()">Print Surat</button>
-    </div>
+    </div> -->
 </body>
 </html>

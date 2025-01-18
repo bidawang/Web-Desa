@@ -10,6 +10,7 @@ use App\Models\VideoModel;
 use App\Models\KontakModel;
 use App\Models\PelayananModel;
 use App\Models\ProdukModel;
+use App\Models\PopulerModel;
 
 class Home extends BaseController
 {
@@ -20,7 +21,7 @@ class Home extends BaseController
     protected $linkModel;
     protected $kontakModel;
     protected $produkModel;
-
+    protected $populerModel;
     protected $pelayananModel;
 
     public function __construct()
@@ -33,35 +34,43 @@ class Home extends BaseController
         $this->kontakModel = new KontakModel();
         $this->produkModel = new ProdukModel();
         $this->pelayananModel = new PelayananModel();
+        $this->populerModel = new PopulerModel();
+
     }
 
+    // Pastikan model PopulerModel sudah di-load dengan benar
     public function index(): string
     {
-
-        $gallery = $this->fotoModel->getFoto();
-        $berita = $this->beritaModel->findAll();
-        $video = $this->videoModel->findAll();
+        // Ambil data lainnya
+        $gallery = $this->fotoModel->orderBy('created_at', 'DESC')->findAll(3);  // Ambil 4 foto terbaru
+        $video = $this->videoModel->orderBy('created_at', 'DESC')->findAll(3);  // Ambil 4 video terbaru
         $pengaturan = $this->pengaturanModel->first();
         $link = $this->linkModel->getLink();
         $kontak = $this->kontakModel->first();
-        $produk = $this->produkModel->findAll();
+        $produk = $this->produkModel->orderBy('created_at', 'DESC')->findAll(6);  // Ambil 6 produk unggulan terbaru
         $pelayanan = $this->pelayananModel->findAll();
-        // dd($kontak[0]['deskripsi']);
-
-
+    
+        // Mengambil 6 berita terpopuler berdasarkan klik menggunakan metode dari model PopulerModel
+        $topBerita = $this->populerModel->getPopulerBerita(6); // Ambil 6 berita terpopuler
+    
+        // Siapkan data yang akan dikirim ke view
         $data = [
             'title' => 'Pemerintah Desa Bentok Darat',
-            'gallery' => $gallery,
-            'berita' => $berita,
-            'video' => $video,
+            'gallery' => $gallery,  // 4 foto terbaru
+            'berita' => $topBerita, // 6 berita berdasarkan klik terbanyak
+            'video' => $video,      // 4 video terbaru
             'pengaturan' => $pengaturan,
             'link' => $link,
             'kontak' => $kontak,
-            'produk' => $produk,
+            'produk' => $produk,    // 6 produk unggulan terbaru
             'pelayanan' => $pelayanan
         ];
+    
+        // Return tampilan (view)
         return view('landingpage/index', $data);
     }
+    
+
 
 
     public function Dashboard(): string

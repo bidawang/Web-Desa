@@ -25,20 +25,37 @@ class ProdukController extends BaseController
 
     public function pageProduk()
     {
-        $produk = $this->produkModel->findAll();
+        $search = $this->request->getVar('search'); // Ambil keyword pencarian
+        $perPage = 6; // Jumlah data per halaman
+    
+        if ($search) {
+            // Jika ada pencarian
+            $produk = $this->produkModel
+                ->like('nama_produk', $search)
+                ->paginate($perPage, 'produk');
+        } else {
+            // Jika tidak ada pencarian
+            $produk = $this->produkModel->paginate($perPage, 'produk');
+        }
+    
+        $pager = $this->produkModel->pager; // Objek pager untuk pagination
         $pengaturan = $this->pengaturanModel->first();
         $link = $this->linkModel->getLink();
         $kontak = $this->kontakModel->first();
+    
         $data = [
             'title' => 'Produk',
             'produk' => $produk,
+            'pager' => $pager,
             'pengaturan' => $pengaturan,
             'link' => $link,
-            'kontak' => $kontak
+            'kontak' => $kontak,
+            'search' => $search, // Keyword pencarian
         ];
-
+    
         return view('landingpage/pageproduk', $data);
     }
+    
 
     public function pageDetailProduk($slug)
 {

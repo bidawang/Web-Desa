@@ -47,10 +47,18 @@ class BeritaController extends BaseController
     // }
     public function pageNews()
 {
-    $perPage = 6;
+    $perPage = 4; // Jumlah berita per halaman
+    $search = $this->request->getVar('search'); // Ambil keyword pencarian
 
-    // Ambil data dengan pagination
-    $berita = $this->beritaModel->paginate($perPage, 'berita'); // Grup 'berita'
+    // Jika ada pencarian, filter berita berdasarkan judul
+    if ($search) {
+        $berita = $this->beritaModel
+            ->like('judul_berita', $search)
+            ->paginate($perPage, 'berita');
+    } else {
+        $berita = $this->beritaModel->paginate($perPage, 'berita'); // Tanpa filter
+    }
+
     $pager = $this->beritaModel->pager; // Objek pager
 
     // Data tambahan
@@ -70,10 +78,12 @@ class BeritaController extends BaseController
         'link' => $link,
         'kontak' => $kontak,
         'populerBerita' => $PopulerModel,
+        'search' => $search, // Keyword pencarian
     ];
 
     return view('landingpage/pagenews', $data);
 }
+
     
 
 

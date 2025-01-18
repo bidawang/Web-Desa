@@ -200,7 +200,7 @@
                                 <?= $gallery['deskripsi'] ?>
                             </p>
                             <!-- format hari bulan tahun -->
-                            <p><small class="text-muted">Created at :
+                            <p><small class="text-muted">
                                     <?= date('d F Y', strtotime($gallery['created_at'])); ?>
                                 </small></p>
                         </div>

@@ -52,6 +52,7 @@
                                         <th>Lokasi Kejadian</th>
                                         <th>Penyebab Kematian</th>
                                         <th>Hubungan Dengan Almarhum/Almarhumah</th>
+                                        <th>Detail</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -61,13 +62,66 @@
                                         <tr>
                                             <td><?= $i++; ?></td>
                                             <td><?= $p['nomor_surat']; ?></td>
-                                            <td><?= $p['nik_pengaju']; ?><br><?= $pengaju['nama_lengkap']?></td>
-                                            <td><?= $p['nik_kematian']; ?><br><?= 'nama Yang meninggal' ?></td>
+                                            <td><?= $p['nik_pengaju']; ?><br><?= $pengaju['nama_lengkap'] ?></td>
+                                            <td><?= $p['nik_kematian']; ?><br><?= $kematian['nama_lengkap'] ?></td>
                                             <td><?= $p['datetime_kematian']; ?></td>
                                             <td><?= $p['lokasi_kematian']; ?></td>
                                             <td><?= $p['penyebab_kematian']; ?></td>
                                             <td><?= $p['hubungan']; ?></td>
-                                            
+
+                                            <td>
+                                                <!-- Button to trigger modal -->
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailModal<?= $p['id_sk_kematian']; ?>">Lihat Detail</button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="detailModal<?= $p['id_sk_kematian']; ?>" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel<?= $p['id_sk_kematian']; ?>" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="detailModalLabel<?= $p['id_sk_kematian']; ?>">Detail SK Kematian</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Detail Information -->
+                                                                <div class="text-center">
+                                                                    <h6 class="font-weight-bold mb-3"><?= $pengaju['nama_lengkap'] ?? 'Tidak Ditemukan'; ?></h6>
+                                                                    <h6 class="font-weight-bold mb-3">No HP: <?= $no_hp['no_hp'] ?? 'Tidak Ditemukan'; ?></h6>
+                                                                </div>
+
+                                                                <!-- Foto Section -->
+                                                                <?php if (!empty($p['bukti'])): ?>
+                                                                    <div class="row">
+                                                                        <?php foreach ($p['bukti'] as $dokumen): ?>
+                                                                            <div class="col-md-6 mb-3 text-center">
+                                                                                <label class="d-block"><?= htmlspecialchars($dokumen['jenis_dokumen'], ENT_QUOTES, 'UTF-8'); ?></label>
+                                                                                <img 
+                                                                                    src="<?= base_url('bukti_dokumen/' . htmlspecialchars($dokumen['nama_file'], ENT_QUOTES, 'UTF-8')); ?>" 
+                                                                                    alt="Foto" 
+                                                                                    class="img-fluid rounded border"
+                                                                                    style="max-height: 300px; object-fit: cover;">
+                                                                            </div>
+                                                                        <?php endforeach; ?>
+                                                                    </div>
+                                                                <?php else: ?>
+                                                                    <p class="text-muted">Tidak ada foto yang tersedia.</p>
+                                                                <?php endif; ?>
+
+                                                                <!-- Print Link -->
+                                                                <div class="text-center m-4">
+                                                                    <a class="btn btn-success btn-sm text-center" href="<?= base_url('kitaprint_surat/1/' . $p['id_sk_kematian']); ?>" target="_blank">
+                                                                        <?= esc($p['nomor_surat']); ?>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <form action="<?= base_url('/pelayanan/update_status/' . $p['id_sk_kematian']); ?>" method="post" class="status-form" style="display:inline;">
                                                     <?= csrf_field(); ?>
@@ -76,7 +130,7 @@
                                                         <option value="acc" <?= $p['status'] === 'acc' ? 'selected' : ''; ?>>Selesai</option>
                                                         <option value="tolak" <?= $p['status'] === 'tolak' ? 'selected' : ''; ?>>Ditolak</option>
                                                     </select>
-                                                    <input type="hidden" name="id_pelayanan" value="<?= $p['id_pelayanan']; ?>" id="">
+                                                    <input type="hidden" name="id_pelayanan" value="<?= $p['id_pelayanan']; ?>">
                                                 </form>
                                             </td>
                                         </tr>

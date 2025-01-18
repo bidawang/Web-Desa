@@ -11,14 +11,24 @@ class FotoModel extends Model
     protected $allowedFields = ['judul_foto', 'nama_foto', 'deskripsi', 'carousel'];
 
 
-    public function getFoto($judul_foto = false)
-    {
-        if ($judul_foto == false) {
-            return $this->findAll();
-        }
-        return $this->where(['judul_foto' => $judul_foto])->first();
+    // public function getFoto($judul_foto = false)
+    // {
+    //     if ($judul_foto == false) {
+    //         return $this->findAll();
+    //     }
+    //     return $this->where(['judul_foto' => $judul_foto])->first();
+    // }
 
+    public function getFoto($judul_foto = false, $perPage = 6)
+{
+    if ($judul_foto) {
+        // Jika ada filter pencarian
+        return $this->like('judul_foto', $judul_foto)->paginate($perPage, 'gallery');
     }
+    // Default: Pagination tanpa filter
+    return $this->paginate($perPage, 'gallery');
+}
+
 
     public function getCarousel()
     {
@@ -42,7 +52,6 @@ class FotoModel extends Model
         $this->where('id', $id)
             ->set(['carousel' => 1])
             ->update();
-
     }
 
 

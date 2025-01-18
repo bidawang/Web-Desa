@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class   PopulerModel extends Model
+class PopulerModel extends Model
 {
     protected $table = 'tb_populer';
     protected $useTimestamps = false;

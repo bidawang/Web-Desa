@@ -119,6 +119,11 @@
                                                                     <p class="text-muted">Tidak ada foto yang tersedia.</p>
                                                                 <?php endif; ?>
                                                             </div>
+                                                            <div class="text-center m-4">
+                <a class="btn btn-success btn-sm text-center" href="<?= base_url('kitaprint_surat/2/' . $p['id_skk']); ?>" target="_blank">
+                <?= esc($p['nomor_surat']); ?>
+                </a>
+                </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                             </div>

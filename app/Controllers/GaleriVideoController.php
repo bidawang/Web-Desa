@@ -26,21 +26,39 @@ class GaleriVideoController extends BaseController
     }
 
     public function pageVideoGallery()
-    {
-        $video = $this->videoModel->findAll();
-        $pengaturan = $this->pengaturanModel->first();
-        $link = $this->linkModel->getLink();
-        $kontak = $this->kontakModel->first();
-        $data = [
-            'title' => 'Galeri Video',
-            'video' => $video,
-            'pengaturan' => $pengaturan,
-            'link' => $link,
-            'kontak' => $kontak
-        ];
+{
+    $search = $this->request->getVar('search'); // Ambil keyword pencarian
+    $perPage = 6; // Jumlah data per halaman
 
-        return view('landingpage/pagevideogallery', $data);
+    if ($search) {
+        // Jika ada pencarian
+        $video = $this->videoModel
+            ->like('judul_video', $search)
+            ->paginate($perPage, 'video');
+    } else {
+        // Jika tidak ada pencarian
+        $video = $this->videoModel->paginate($perPage, 'video');
     }
+
+    $pager = $this->videoModel->pager; // Objek pager untuk pagination
+    $pengaturan = $this->pengaturanModel->first();
+    $link = $this->linkModel->getLink();
+    $kontak = $this->kontakModel->first();
+
+    $data = [
+        'title' => 'Galeri Video',
+        'video' => $video,
+        'pager' => $pager,
+        'pengaturan' => $pengaturan,
+        'link' => $link,
+        'kontak' => $kontak,
+        'search' => $search, // Keyword pencarian
+    ];
+
+    return view('landingpage/pagevideogallery', $data);
+}
+
+
     public function index()
     {
         

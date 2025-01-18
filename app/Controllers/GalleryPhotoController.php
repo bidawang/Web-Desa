@@ -37,23 +37,31 @@ class GalleryPhotoController extends BaseController
     }
 
     public function page_gallery()
-    {
-        $gallery = $this->fotoModel->getFoto();
-        $link = $this->linkModel->getLink();
-        $pengaturan = $this->pengaturanModel->first();
-        $kontak = $this->kontakModel->first();
+{
+    $search = $this->request->getVar('search'); // Ambil keyword pencarian
+    $perPage = 6; // Jumlah data per halaman
 
-        $data = [
-            'title' => 'Gallery Photo',
-            'gallery' => $gallery,
-            'link' => $link,
-            'pengaturan' => $pengaturan,
-            'kontak' => $kontak
+    $gallery = $this->fotoModel->getFoto($search, $perPage); // Panggil metode dengan pagination
+    $pager = $this->fotoModel->pager; // Ambil objek pager
 
-        ];
+    $link = $this->linkModel->getLink();
+    $pengaturan = $this->pengaturanModel->first();
+    $kontak = $this->kontakModel->first();
 
-        return view('landingpage/page-gallery', $data);
-    }
+    $data = [
+        'title' => 'Gallery Photo',
+        'gallery' => $gallery,
+        'pager' => $pager,
+        'link' => $link,
+        'pengaturan' => $pengaturan,
+        'kontak' => $kontak,
+        'search' => $search, // Keyword pencarian
+    ];
+
+    return view('landingpage/page-gallery', $data);
+}
+
+
 
     public function carousel()
     {

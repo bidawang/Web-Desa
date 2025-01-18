@@ -120,6 +120,7 @@ class SuratController extends BaseController
 
         return view('landingpage/surat/kelahiran', $data);
     } elseif ($id == 3) {
+            
         return view('landingpage/surat/kematian', $data);
     } 
 }
@@ -265,7 +266,7 @@ if('hubungan_keluarga == Kepala Keluarga'){
         'hubungan_dengan_bayi' => $hubungan,
         'tempat_lahir_anak' => $data['tempat_lahir_anak'],
     ];
-    dd($insertData);
+    // dd($insertData);
     if ($model->insert($insertData)) {
         $idSurat = $model->getInsertID();
 
@@ -465,6 +466,7 @@ public function viewKematian()
     $kontak = $model->first();
     // dd($kontak);
     $getkontak = $this->anggotaKK->where('nik', $kontak['nik_pengaju'])->first();
+    $kematian =$this->anggotaKK->where('nik', $kontak['nik_kematian'])->first();
 
     $get = $this->userMasyarakat->where('id_anggota_keluarga', $getkontak['id_anggota'])->first();
     // Menambahkan bukti dokumen terkait setiap surat
@@ -477,6 +479,7 @@ public function viewKematian()
     return view('surat/skkematian', [
         'surat' => $data['surat'],
         'bukti' => $bukti,
+        'kematian' => $kematian,
         'no_hp' => $get,
         'pengaju' => $getkontak,
         'title' => 'Surat Kematian',
@@ -668,9 +671,6 @@ public function print_sk_kelahiran($id){
 
     return view('pelayanan/surat/skkelahiran', $data);
 }
-
-
-
 
     public function print_sk_kematian($id){
         // Ambil data surat berdasarkan ID

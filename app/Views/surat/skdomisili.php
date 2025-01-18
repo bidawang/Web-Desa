@@ -42,7 +42,7 @@
                             <?php endif; ?>
 
                             <table id="example2" class="table table-bordered table-hover">
-                                <<thead>
+                                <thead>
     <tr>
         <th>No</th>
         <th>Nomor Surat</th>
@@ -78,11 +78,11 @@
             </div>
             <div class="modal-body">
                 <!-- Persyaratan Section -->
-                <h6 class="font-weight-bold mb-3">Persyaratan:</h6>
-                <p><?= $p['id_skd']; ?></p>
-
+                 <div class="text-center">
+                <h6 class="font-weight-bold mb-3"><?= $pengaju['nama_lengkap'] ?? 'Tidak Ditemukan'; ?></h6>
+                <h6 class="font-weight-bold mb-3">No HP : <?= $no_hp['no_hp'] ?? 'Tidak Ditemukan'; ?></h6>
+                </div>
                 <!-- Foto Section -->
-                <h6 class="font-weight-bold mt-4 mb-3">Foto:</h6>
                 <?php if (!empty($p['bukti'])): ?>
                     <div class="row">
                         <?php foreach ($p['bukti'] as $dokumen): ?>
@@ -99,6 +99,11 @@
                 <?php else: ?>
                     <p class="text-muted">Tidak ada foto yang tersedia.</p>
                 <?php endif; ?>
+                <div class="text-center m-4">
+                <a class="btn btn-success btn-sm text-center" href="<?= base_url('kitaprint_surat/1/' . $p['id_skd']); ?>" target="_blank">
+                <?= esc($p['nomor_surat']); ?>
+                </a>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -108,9 +113,6 @@
 </div>
 
 </td>
-
-
-
                                             <td>
                                                 <form action="<?= base_url('/pelayanan/update_status/' . $p['id_skd']); ?>" method="post" class="status-form" style="display:inline;">
                                                     <?= csrf_field(); ?>

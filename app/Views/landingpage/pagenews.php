@@ -10,33 +10,40 @@
             <h1 class="display-6">Berita Terbaru Seputar Kawasan <?= $pengaturan['nama_desa']; ?></h1>
         </div>
 
+        <!-- Form Pencarian -->
+        <form method="get" class="mb-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari berita..." value="<?= esc($search) ?>">
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </div>
+        </form>
+
         <div class="row wow fadeInUp" data-wow-delay="0.5s">
             <!-- Sisi Kiri (Berita Terbaru - Terpengaruh Pagination) -->
             <div class="col-lg-8 col-md-12">
-                <?php 
-                // Menampilkan berita terbaru sesuai dengan halaman (pagination)
-                $counter = 0; 
-                foreach ($berita as $b): 
-                    if ($counter >= 3) break; // Batasi hanya 3 berita pertama pada halaman ini
-                ?>
-                    <a href="<?= base_url('page-news/' . $b['slug']); ?>" class="d-block product-item rounded mb-4">
-                        <div class="bg-white shadow-sm text-center p-4 mt-2">
-                            <img src="<?= base_url('uploads/' . $b['foto']); ?>" alt="<?= $b['judul_berita']; ?>" class="img-fluid mb-3">
-                            <h5 class="fw-bold"><?= $b['judul_berita']; ?></h5>
-                            <p class="text-body"><?= substr(strip_tags($b['isi']), 0, 150); ?>...</p>
-                        </div>
-                    </a>
-                <?php $counter++; endforeach; ?>
+                <?php if (count($berita) > 0): ?>
+                    <?php foreach ($berita as $b): ?>
+                        <a href="<?= base_url('page-news/' . $b['slug']); ?>" class="d-block product-item rounded mb-4">
+                            <div class="bg-white shadow-sm text-center p-4 mt-2">
+                                <img src="<?= base_url('uploads/' . $b['foto']); ?>" alt="<?= $b['judul_berita']; ?>" class="img-fluid mb-3">
+                                <h5 class="fw-bold"><?= $b['judul_berita']; ?></h5>
+                                <p class="text-body"><?= substr(strip_tags($b['isi']), 0, 150); ?>...</p>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="text-center">
+                        <p>Tidak ada berita ditemukan.</p>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- Sisi Kanan (Berita Populer - Data dari tabel populer) -->
             <div class="card col-lg-4 col-md-12 mt-4 mt-lg-0">
                 <div class="text-center mx-auto wow fadeInUp mt-3" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h1>Berita Populer</h1>
+                    <h1>Berita Populer</h1>
                 </div>
-                <?php 
-                foreach ($populerBerita as $b): 
-                ?>
+                <?php foreach ($populerBerita as $b): ?>
                     <a href="<?= base_url('page-news/' . $b['slug']); ?>" class="d-block product-item rounded mb-3">
                         <div class="bg-white shadow-sm text-center p-3">
                             <img src="<?= base_url('uploads/' . $b['foto']); ?>" alt="<?= $b['judul_berita']; ?>" class="img-fluid mb-2">
