@@ -11,6 +11,10 @@ use App\Models\KontakModel;
 use App\Models\PelayananModel;
 use App\Models\ProdukModel;
 use App\Models\PopulerModel;
+use App\Models\SKDomisiliModel;
+use App\Models\SKKelahiranModel;
+use App\Models\SKKematianModel;
+use App\Models\KkModel;
 
 class Home extends BaseController
 {
@@ -23,6 +27,10 @@ class Home extends BaseController
     protected $produkModel;
     protected $populerModel;
     protected $pelayananModel;
+    protected $skkelahiranModel;
+    protected $skkematianModel;
+    protected $skdomisiliModel;
+    protected $kkModel;
 
     public function __construct()
     {
@@ -35,6 +43,10 @@ class Home extends BaseController
         $this->produkModel = new ProdukModel();
         $this->pelayananModel = new PelayananModel();
         $this->populerModel = new PopulerModel();
+        $this->skdomisiliModel = new SKDomisiliModel();
+        $this->skkelahiranModel = new SKKelahiranModel();
+        $this->skkematianModel = new SKKematianModel();
+        $this->kkModel = new KkModel();
 
     }
 
@@ -75,9 +87,20 @@ class Home extends BaseController
 
     public function Dashboard(): string
     {
+
+        $totalKK = $this->kkModel->countAllResults();
+        $totalSKKelahiran = $this->skkelahiranModel->countAllResults();
+        $totalSKKematian = $this->skkematianModel->countAllResults();
+        $totalSKDomisili = $this->skdomisiliModel->countAllResults();
+
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'totalKK' => $totalKK,
+            'totalSKKelahiran' => $totalSKKelahiran,
+            'totalSKKematian' => $totalSKKematian,
+            'totalSKDomisili' => $totalSKDomisili,
         ];
+
         return view('dashboard/index', $data);
     }
 }
